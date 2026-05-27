@@ -1,0 +1,141 @@
+/* theme.css — colour palette, typography, and atmospheric effects
+   All colours are defined as CSS custom properties (variables) here.
+   Use var(--name) throughout the other stylesheets. */
+
+:root {
+  /* --- Colour palette --- */
+  --bg:             #0f0d0a;   /* near-black with a warm undertone */
+  --panel:          #141210;   /* slightly lighter for panel backgrounds */
+  --panel-raised:   #1a1714;   /* cards / raised surfaces */
+  --border:         #3d2e0e;   /* dark warm brown for all borders */
+  --border-light:   #5a4520;   /* slightly lighter border for hover / active */
+
+  --text-primary:   #c8a84b;   /* warm amber — main body text */
+  --text-secondary: #8a7035;   /* dimmer amber — labels, hints */
+  --text-bright:    #e8dcc0;   /* cream — headings, important values */
+  --text-dim:       #4a3820;   /* very dim — placeholder, muted notes */
+
+  --accent:         #d4a843;   /* highlight amber — active tabs, buttons */
+  --accent-glow:    rgba(212, 168, 67, 0.12); /* subtle glow for hover states */
+
+  --error-bg:       #1a0808;   /* dark red background for errors */
+  --error-text:     #c84040;   /* error message text */
+  --error-border:   #5a1515;
+
+  --blocked-bg:     #1a1208;   /* orange-tinted background for blocked queries */
+  --blocked-text:   #c87820;
+  --blocked-border: #5a3a08;
+
+  --success-bg:     #081a08;
+  --success-text:   #40c870;
+
+  --modal-overlay:  rgba(0, 0, 0, 0.75);
+
+  /* --- Typography --- */
+  /* JetBrains Mono is loaded in index.html from Google Fonts */
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --text-xs:   11px;
+  --text-sm:   12px;
+  --text-base: 14px;
+  --text-md:   16px;
+  --text-lg:   20px;
+  --text-xl:   24px;
+
+  /* --- Spacing --- */
+  --gap-xs:  4px;
+  --gap-sm:  8px;
+  --gap-md:  16px;
+  --gap-lg:  24px;
+  --gap-xl:  32px;
+
+  /* --- Layout dimensions --- */
+  --header-height: 56px;
+  --footer-height: 52px;
+  --left-panel-width: 420px;
+}
+
+/* --- Base styles --- */
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  /* Prevent the flash of unstyled text while Google Fonts loads */
+  font-display: swap;
+}
+
+/* --- Utility classes --- */
+
+.hidden {
+  display: none !important;
+}
+
+/* --- Film grain effect ---
+   A large SVG turbulence texture is shifted randomly every 0.5s
+   to simulate film grain. Opacity is low so it's atmospheric, not distracting. */
+
+.grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  /* Inline SVG with fractal noise filter, URL-encoded */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;  /* clicks pass straight through */
+  animation: grain-shift 0.4s steps(1) infinite;
+  z-index: 9000;
+  will-change: transform; /* hint to the browser to use GPU */
+}
+
+@keyframes grain-shift {
+  0%   { transform: translate(0,    0   ) }
+  10%  { transform: translate(-4%,  -8% ) }
+  20%  { transform: translate(-12%, 4%  ) }
+  30%  { transform: translate(6%,   -20%) }
+  40%  { transform: translate(-4%,  20% ) }
+  50%  { transform: translate(-12%, 8%  ) }
+  60%  { transform: translate(12%,  0%  ) }
+  70%  { transform: translate(0%,   12% ) }
+  80%  { transform: translate(2%,   28% ) }
+  90%  { transform: translate(-8%,  8%  ) }
+  100% { transform: translate(0,    0   ) }
+}
+
+/* --- Scanline effect ---
+   Thin horizontal lines at 50% opacity simulate an old monitor. */
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 9001;
+}
+
+/* --- Scrollbar styling for panels that overflow --- */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-light);
+}

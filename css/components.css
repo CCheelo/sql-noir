@@ -1,0 +1,541 @@
+/* components.css — all reusable UI pieces: tabs, buttons, results, modal, etc. */
+
+/* ============================================================
+   TABS (left panel: QUERY | BRIEFING | SCHEMA)
+   ============================================================ */
+
+.panel-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: var(--gap-sm) var(--gap-md);
+  font-size: var(--text-xs);
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background: var(--accent-glow);
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Tab content panels — only the .active one is visible */
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ============================================================
+   QUERY EDITOR TAB
+   ============================================================ */
+
+#tab-query {
+  padding: 0;
+}
+
+#query-editor-wrap {
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+  border-bottom: 1px solid var(--border);
+  /* CodeMirror mounts here and fills this container */
+}
+
+/* CodeMirror container needs explicit height to fill its parent */
+#query-editor-wrap .cm-editor {
+  height: 100%;
+}
+
+#query-editor-wrap .cm-scroller {
+  overflow: auto;
+}
+
+.query-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  padding: var(--gap-sm) var(--gap-md);
+  flex-shrink: 0;
+}
+
+.query-hint {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   BRIEFING TAB
+   ============================================================ */
+
+#tab-briefing {
+  overflow-y: auto;
+}
+
+.briefing-body {
+  padding: var(--gap-lg);
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-size: var(--text-sm);
+  white-space: pre-wrap; /* preserve the line breaks from story.json */
+}
+
+/* ============================================================
+   SCHEMA TAB
+   ============================================================ */
+
+#tab-schema {
+  overflow-y: auto;
+}
+
+.schema-header {
+  padding: var(--gap-md) var(--gap-md) var(--gap-sm);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+}
+
+.schema-list {
+  padding: var(--gap-sm) 0;
+}
+
+.schema-list li {
+  padding: var(--gap-xs) var(--gap-md);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  cursor: default;
+  transition: background 0.1s;
+  border-left: 2px solid transparent;
+}
+
+.schema-list li:hover {
+  background: var(--accent-glow);
+  border-left-color: var(--accent);
+  color: var(--text-bright);
+}
+
+.schema-tip {
+  padding: var(--gap-md);
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  line-height: 1.7;
+}
+
+.schema-tip code {
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  padding: var(--gap-sm) var(--gap-lg);
+  border: 1px solid;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+/* Primary: amber fill */
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  background-color: var(--text-bright);
+  border-color: var(--text-bright);
+}
+
+.btn-primary:active {
+  opacity: 0.85;
+}
+
+/* Secondary: outlined */
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  color: var(--text-primary);
+  border-color: var(--border-light);
+  background: var(--accent-glow);
+}
+
+/* Accusation button: larger, more prominent */
+.btn-accuse {
+  background: transparent;
+  color: var(--text-bright);
+  border-color: var(--text-bright);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  padding: var(--gap-xs) var(--gap-xl);
+}
+
+.btn-accuse:hover {
+  background: rgba(232, 220, 192, 0.08);
+}
+
+/* Disabled state */
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   RESULTS PANEL (right side)
+   ============================================================ */
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--gap-sm) var(--gap-lg);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.results-label {
+  font-size: var(--text-xs);
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+}
+
+.results-count {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+}
+
+/* The scrollable area where results or messages appear */
+#results-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--gap-lg);
+  min-height: 0;
+}
+
+/* "Waiting for first query" placeholder */
+.results-waiting {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  color: var(--text-dim);
+  font-size: var(--text-sm);
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   RESULT TABLE
+   ============================================================ */
+
+.result-wrapper {
+  border: 1px solid var(--border);
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+/* Column headers */
+.result-table thead th {
+  padding: var(--gap-sm) var(--gap-md);
+  text-align: left;
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  background-color: var(--panel);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  font-weight: 400; /* mono headers don't need to be bold */
+}
+
+/* Data rows */
+.result-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+.result-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.result-table tbody tr:hover {
+  background-color: var(--accent-glow);
+}
+
+.result-table tbody td {
+  padding: var(--gap-sm) var(--gap-md);
+  color: var(--text-primary);
+  vertical-align: top;
+  /* Long text in cells wraps, but the row stays readable */
+  max-width: 320px;
+  word-break: break-word;
+}
+
+/* NULL cells rendered as an em-dash in dimmer colour */
+.result-table tbody td.null-cell {
+  color: var(--text-dim);
+}
+
+/* Row cap notice */
+.result-cap {
+  padding: var(--gap-sm) var(--gap-md);
+  font-size: var(--text-xs);
+  color: var(--blocked-text);
+  background-color: var(--blocked-bg);
+  border-top: 1px solid var(--blocked-border);
+  letter-spacing: 0.05em;
+}
+
+/* Empty results message */
+.result-empty {
+  padding: var(--gap-lg);
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* ============================================================
+   ERROR AND BLOCKED MESSAGES
+   ============================================================ */
+
+.result-error {
+  border: 1px solid var(--error-border);
+  background-color: var(--error-bg);
+  padding: var(--gap-md);
+}
+
+.result-error-label {
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  color: var(--error-text);
+  margin-bottom: var(--gap-sm);
+}
+
+.result-error-msg {
+  font-size: var(--text-sm);
+  color: var(--error-text);
+  opacity: 0.8;
+  white-space: pre-wrap;
+}
+
+.result-blocked {
+  border: 1px solid var(--blocked-border);
+  background-color: var(--blocked-bg);
+  padding: var(--gap-md);
+}
+
+.result-blocked-label {
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  color: var(--blocked-text);
+  margin-bottom: var(--gap-sm);
+  opacity: 0.6;
+}
+
+.result-blocked-msg {
+  font-size: var(--text-sm);
+  color: var(--blocked-text);
+}
+
+/* ============================================================
+   ACCUSATION MODAL
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--modal-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  padding: var(--gap-lg);
+}
+
+.modal-box {
+  background: var(--panel);
+  border: 1px solid var(--border-light);
+  max-width: 520px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--gap-md) var(--gap-lg);
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-stamp {
+  font-size: var(--text-xs);
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+}
+
+.modal-close {
+  font-size: var(--text-md);
+  color: var(--text-dim);
+  line-height: 1;
+  padding: 2px var(--gap-xs);
+  border-radius: 2px;
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: var(--gap-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+.modal-intro {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.modal-label {
+  font-size: var(--text-xs);
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+}
+
+.modal-select {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  padding: var(--gap-sm) var(--gap-md);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  /* Custom arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a7035'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.modal-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Feedback message inside the modal (wrong / correct response) */
+.accusation-feedback {
+  padding: var(--gap-md);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  border: 1px solid var(--border);
+}
+
+.accusation-feedback.wrong {
+  background: var(--error-bg);
+  border-color: var(--error-border);
+  color: var(--error-text);
+}
+
+.accusation-feedback.correct {
+  background: var(--success-bg);
+  border-color: var(--success-text);
+  color: var(--success-text);
+}
+
+.accusation-feedback.gameover {
+  background: var(--error-bg);
+  border-color: var(--error-border);
+  color: var(--error-text);
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--gap-md);
+  justify-content: flex-end;
+}
+
+/* ============================================================
+   ENDING SCREEN (shown after correct accusation)
+   Replaces the results area with the epilogue text.
+   ============================================================ */
+
+.ending-screen {
+  padding: var(--gap-xl);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.ending-stamp {
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  color: var(--text-secondary);
+  margin-bottom: var(--gap-md);
+}
+
+.ending-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: var(--gap-xl);
+  letter-spacing: 0.05em;
+}
+
+.ending-epilogue {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: 1.9;
+  white-space: pre-wrap;
+  margin-bottom: var(--gap-xl);
+}
+
+.ending-rank {
+  font-size: var(--text-md);
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--gap-xl);
+}

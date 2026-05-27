@@ -1,0 +1,277 @@
+{
+  "caseVersion": "1.0.0",
+  "caseName": "Death at The Copperbelt Room",
+  "caseNumber": "74/LKS/1147",
+  "setting": "Lusaka, Zambia — November 1974",
+
+  "solution": {
+    "killerId": "grace_mwape",
+    "weapon": "guitar_estring",
+    "locationId": "loc_copperbelt_alley"
+  },
+
+  "people": [
+    {
+      "id": "victor_kasonde",
+      "name": "Victor Kasonde",
+      "alias": "Vic",
+      "dob": "1947-03-12",
+      "gender": "M",
+      "occupation": "Musician",
+      "address_id": "addr_northmead_flat_1",
+      "notes": "Lead guitarist and vocalist, Broken String. House band at The Copperbelt Room on Cha Cha Cha Road. Radio Zambia broadcast the band twice in the past year. A third session was being negotiated at the time of death."
+    },
+    {
+      "id": "grace_mwape",
+      "name": "Grace Mwape",
+      "alias": null,
+      "dob": "1931-06-04",
+      "gender": "F",
+      "occupation": "Club Owner",
+      "address_id": "addr_kabulonga_house",
+      "notes": "Co-owner of The Copperbelt Room. Manages the club accounts. Attended Evelyn Hone College. Married to Arthur Mwape."
+    },
+    {
+      "id": "arthur_mwape",
+      "name": "Arthur Mwape",
+      "alias": null,
+      "dob": "1926-11-22",
+      "gender": "M",
+      "occupation": "Club Owner",
+      "address_id": "addr_kabulonga_house",
+      "notes": "Co-owner of The Copperbelt Room. Public-facing partner. Handles relations with musicians, press, and the licensing board. Does not manage the accounts."
+    },
+    {
+      "id": "bernard_chanda",
+      "name": "Bernard Chanda",
+      "alias": null,
+      "dob": "1922-08-15",
+      "gender": "M",
+      "occupation": "Finance Director",
+      "address_id": "addr_rhodes_park_1",
+      "notes": "Senior Director of Finance, NCCM (Nchanga Consolidated Copper Mines). Member, UNIP National Council, Lusaka Province. Drives a grey Mercedes-Benz 220."
+    },
+    {
+      "id": "solomon_musonda",
+      "name": "Solomon Musonda",
+      "alias": "Solo",
+      "dob": "1928-04-18",
+      "gender": "M",
+      "occupation": "Transport Operator",
+      "address_id": "addr_chilenje_1",
+      "notes": "Owner, Musonda Transport. Three trucks on the Lusaka-Ndola corridor. Extends informal personal loans. Known to the precinct for two prior disputes, both resolved."
+    },
+    {
+      "id": "patrick_kabwe",
+      "name": "Patrick Kabwe",
+      "alias": "Pato",
+      "dob": "1945-09-03",
+      "gender": "M",
+      "occupation": "Musician",
+      "address_id": "addr_matero_flat_1",
+      "notes": "Rhythm guitarist, The Copper Kings. Had a public argument with Victor Kasonde on 11 November 1974 over a disputed song composition. Witnesses present."
+    },
+    {
+      "id": "agnes_lungu",
+      "name": "Agnes Lungu",
+      "alias": null,
+      "dob": "1950-02-28",
+      "gender": "F",
+      "occupation": "Secretary",
+      "address_id": "addr_northmead_flat_2",
+      "notes": "Victor Kasonde's girlfriend of fourteen months. Works at a legal firm on Cairo Road. Had been asking questions at the club in the days before the murder."
+    },
+    {
+      "id": "chilufya_nsofu",
+      "name": "Chilufya Nsofu",
+      "alias": null,
+      "dob": "1940-07-09",
+      "gender": "M",
+      "occupation": "Bouncer",
+      "address_id": "addr_chilenje_2",
+      "notes": "Head bouncer, The Copperbelt Room. Three years at the club. Was absent from his post between approximately 22:10 and 22:40 on the night of the murder."
+    },
+    {
+      "id": "choolwe_mutale",
+      "name": "Choolwe Mutale",
+      "alias": null,
+      "dob": "1943-05-14",
+      "gender": "M",
+      "occupation": "Events Promoter",
+      "address_id": "addr_woodlands_flat_1",
+      "notes": "Victor Kasonde's informal booking agent. Arranged Radio Zambia session negotiations and club circuit bookings. Had a dispute with Kasonde over an unpaid commission of 40 kwacha."
+    },
+    {
+      "id": "blessings_mwanza",
+      "name": "Blessings Mwanza",
+      "alias": null,
+      "dob": "1946-12-01",
+      "gender": "F",
+      "occupation": "Bartender",
+      "address_id": "addr_matero_flat_2",
+      "notes": "Head bartender, The Copperbelt Room. Three years at the club. Witnessed the argument between Kabwe and Kasonde on 11 November. On duty the night of the murder."
+    },
+    {
+      "id": "enos_simukonda",
+      "name": "Enos Simukonda",
+      "alias": null,
+      "dob": "1922-03-27",
+      "gender": "M",
+      "occupation": "Caretaker",
+      "address_id": "addr_chilenje_3",
+      "notes": "Club caretaker and night cleaner. Found the body of Victor Kasonde in the rear alley at approximately 01:40 on 15 November 1974."
+    },
+    {
+      "id": "joanna_zulu",
+      "name": "Joanna Zulu",
+      "alias": null,
+      "dob": "1940-08-11",
+      "gender": "F",
+      "occupation": "Recording Coordinator",
+      "address_id": "addr_woodlands_house_1",
+      "notes": "Recording coordinator, Radio Zambia. Was negotiating a full studio session and possible vinyl pressing for Broken String. Met with Kasonde privately twice in the week before his death."
+    },
+    {
+      "id": "elizabeth_kasonde",
+      "name": "Elizabeth Kasonde",
+      "alias": null,
+      "dob": "1942-01-17",
+      "gender": "F",
+      "occupation": "Schoolteacher",
+      "address_id": "addr_kabulonga_flat",
+      "notes": "Victor Kasonde's older sister. Teaches at a primary school in Kabulonga. Next of kin. Notified by DC Mwamba at 06:15 on 15 November 1974."
+    },
+    {
+      "id": "emmanuel_banda",
+      "name": "Emmanuel Banda",
+      "alias": "Manny",
+      "dob": "1949-05-22",
+      "gender": "M",
+      "occupation": "Musician",
+      "address_id": "addr_chilenje_4",
+      "notes": "Bassist, Broken String. Victor Kasonde's closest bandmate. Reported to CID on 15 November that a guitar E-string was missing from the band's supply case. String had been present at the previous rehearsal on 12 November."
+    },
+    {
+      "id": "chibesa_mwamba",
+      "name": "Chibesa Mwamba",
+      "alias": null,
+      "dob": "1948-09-30",
+      "gender": "M",
+      "occupation": "Police Officer",
+      "address_id": "addr_northmead_house",
+      "notes": "Detective Constable, CID Lusaka. First officer to secure the crime scene at The Copperbelt Room. Took initial statements from Nsofu, Mwanza, and Simukonda."
+    },
+    {
+      "id": "boyd_sikazwe",
+      "name": "Boyd Sikazwe",
+      "alias": null,
+      "dob": "1936-07-14",
+      "gender": "M",
+      "occupation": "Journalist",
+      "address_id": "addr_rhodes_park_2",
+      "notes": "Music correspondent, Times of Zambia. Has written two profiles of Broken String, the most recent published August 1974. Was not at the club on the night of the murder."
+    },
+    {
+      "id": "joseph_mwale",
+      "name": "Joseph Mwale",
+      "alias": "Joze",
+      "dob": "1942-03-06",
+      "gender": "M",
+      "occupation": "Musician",
+      "address_id": null,
+      "notes": "Former bassist. Disappeared September 1972. Missing persons case 72/LKS/0891. Never resolved. Last known address: Chilenje. No body found, no explanation given."
+    },
+    {
+      "id": "francis_bwalya",
+      "name": "Francis Bwalya",
+      "alias": null,
+      "dob": "1935-11-04",
+      "gender": "M",
+      "occupation": "Police Officer",
+      "address_id": "addr_woodlands_house_2",
+      "notes": "Detective Inspector, CID Lusaka. Seven years in service. Handles commercial and market-related cases. Assigned to Kamwala district disputes."
+    },
+    {
+      "id": "rajan_patel",
+      "name": "Rajan Patel",
+      "alias": null,
+      "dob": "1930-04-19",
+      "gender": "M",
+      "occupation": "Wholesaler",
+      "address_id": "addr_kamwala_1",
+      "notes": "Co-owner, Patel Brothers Import Wholesale, Kamwala market. Imports dry goods, hardware, and textiles. Third-generation business."
+    },
+    {
+      "id": "suresh_patel",
+      "name": "Suresh Patel",
+      "alias": null,
+      "dob": "1933-08-22",
+      "gender": "M",
+      "occupation": "Wholesaler",
+      "address_id": "addr_kamwala_1",
+      "notes": "Co-owner, Patel Brothers Import Wholesale, Kamwala market. Handles logistics and supplier relations."
+    },
+    {
+      "id": "temwani_phiri",
+      "name": "Temwani Phiri",
+      "alias": null,
+      "dob": "1957-05-03",
+      "gender": "M",
+      "occupation": "Bar Back",
+      "address_id": "addr_matero_flat_3",
+      "notes": "Bar back, The Copperbelt Room. Seventeen years old. Reported seeing a woman follow Kasonde toward the rear exit at approximately 22:10 on the night of the murder. Did not see her face clearly."
+    }
+  ],
+
+  "addresses": [
+    { "id": "addr_northmead_flat_1",  "street": "14B Bwacha Road",            "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_northmead_flat_2",  "street": "7 Bwacha Road",              "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_northmead_house",   "street": "22 Lumumba Road",            "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_kabulonga_house",   "street": "4 Leopards Hill Road",       "neighborhood": "Kabulonga",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_kabulonga_flat",    "street": "11A Leopards Hill Road",     "neighborhood": "Kabulonga",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_chilenje_1",        "street": "33 Chilenje South",          "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
+    { "id": "addr_chilenje_2",        "street": "18 Chilenje South",          "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
+    { "id": "addr_chilenje_3",        "street": "9 Chilenje North",           "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
+    { "id": "addr_chilenje_4",        "street": "27 Chilenje South",          "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
+    { "id": "addr_matero_flat_1",     "street": "5 Freedom Way",              "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
+    { "id": "addr_matero_flat_2",     "street": "12 Freedom Way",             "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
+    { "id": "addr_matero_flat_3",     "street": "3 Freedom Way",              "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
+    { "id": "addr_woodlands_flat_1",  "street": "8 Addis Ababa Drive",        "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_woodlands_house_1", "street": "19 Addis Ababa Drive",       "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_woodlands_house_2", "street": "31 Addis Ababa Drive",       "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_rhodes_park_1",     "street": "2 Independence Avenue",      "neighborhood": "Rhodes Park", "city": "Lusaka", "type": "residence" },
+    { "id": "addr_rhodes_park_2",     "street": "15 Independence Avenue",     "neighborhood": "Rhodes Park", "city": "Lusaka", "type": "residence" },
+    { "id": "addr_kamwala_1",         "street": "Kamwala Market, Stand 44",   "neighborhood": "Kamwala",     "city": "Lusaka", "type": "business" },
+    { "id": "addr_copperbelt_room",   "street": "12 Cha Cha Cha Road",        "neighborhood": "City Centre", "city": "Lusaka", "type": "venue" },
+    { "id": "addr_copperbelt_alley",  "street": "Rear alley, 12 Cha Cha Cha Road", "neighborhood": "City Centre", "city": "Lusaka", "type": "crime_scene" },
+    { "id": "addr_ridgeway_lounge",   "street": "Ridgeway Hotel, Church Road","neighborhood": "Ridgeway",    "city": "Lusaka", "type": "venue" },
+    { "id": "addr_unza_nice",         "street": "Great East Road Campus",     "neighborhood": "Northmead",   "city": "Lusaka", "type": "venue" }
+  ],
+
+  "accusationChoices": {
+    "suspects": [
+      "grace_mwape",
+      "solomon_musonda",
+      "patrick_kabwe",
+      "agnes_lungu",
+      "choolwe_mutale",
+      "chilufya_nsofu",
+      "arthur_mwape"
+    ],
+    "weapons": [
+      { "id": "guitar_estring", "label": "Guitar E-string wire"     },
+      { "id": "service_revolver", "label": "Service revolver (.38)" },
+      { "id": "broken_bottle",  "label": "Broken glass bottle"      }
+    ],
+    "locations": [
+      { "id": "loc_copperbelt_alley",  "label": "Alley behind The Copperbelt Room" },
+      { "id": "loc_copperbelt_office", "label": "The club manager's office"         },
+      { "id": "loc_northmead_flat",    "label": "Kasonde's flat in Northmead"       }
+    ]
+  },
+
+  "clues": [],
+  "sideThreads": [],
+  "achievements": [],
+  "endings": []
+}

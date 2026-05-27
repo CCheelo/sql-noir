@@ -1,0 +1,102 @@
+/* loading.css — the "Loading case files…" splash screen shown during WASM init */
+
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8000; /* below grain/scanlines (9000+) but above everything else */
+}
+
+.loading-content {
+  text-align: center;
+  max-width: 480px;
+  padding: var(--gap-xl);
+}
+
+/* The "ZAMBIA POLICE SERVICE" stamp at the top */
+.loading-stamp {
+  font-size: var(--text-sm);
+  letter-spacing: 0.25em;
+  color: var(--text-secondary);
+  margin-bottom: var(--gap-xs);
+}
+
+/* Thin horizontal rule between sections */
+.loading-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--gap-sm) auto;
+  width: 60%;
+}
+
+.loading-dept {
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  margin-bottom: var(--gap-md);
+}
+
+/* The big case number */
+.loading-file-number {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-bright);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--gap-sm);
+}
+
+.loading-subject {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--gap-xl);
+}
+
+/* Status line with a blinking cursor */
+.loading-status {
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  margin-bottom: var(--gap-md);
+  height: 22px; /* fixed height prevents layout shift when text changes */
+}
+
+/* The blinking underscore cursor after the status text */
+.loading-cursor {
+  display: inline-block;
+  color: var(--accent);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Progress bar track (the container) */
+.loading-bar-track {
+  width: 100%;
+  height: 2px;
+  background-color: var(--border);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+/* Progress bar fill — width is updated by main.js via inline style */
+.loading-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--accent);
+  transition: width 0.4s ease;
+  border-radius: 1px;
+}
+
+/* Error message shown if init fails */
+.loading-error {
+  margin-top: var(--gap-lg);
+  font-size: var(--text-sm);
+  color: var(--error-text);
+  min-height: 20px;
+}

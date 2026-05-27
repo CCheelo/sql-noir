@@ -1,0 +1,201 @@
+/* layout.css — overall page structure: header, two-panel main, footer */
+
+/* --- Mobile gate ---
+   Shown below 900px instead of the game. The rest of the page is still readable
+   for people who get a share link on their phone. */
+
+#mobile-gate {
+  display: none; /* shown via media query below */
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  align-items: center;
+  justify-content: center;
+  padding: var(--gap-xl);
+  text-align: center;
+  z-index: 7000;
+}
+
+.mobile-gate-inner {
+  max-width: 400px;
+}
+
+.mobile-gate-stamp {
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  color: var(--text-secondary);
+  margin-bottom: var(--gap-sm);
+}
+
+.mobile-gate-title {
+  font-size: var(--text-sm);
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: var(--gap-xl);
+}
+
+.mobile-gate-message {
+  font-size: var(--text-md);
+  color: var(--text-bright);
+  line-height: 1.7;
+  margin-bottom: var(--gap-lg);
+}
+
+.mobile-gate-sub {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  #mobile-gate { display: flex; }
+  #game        { display: none !important; }
+  #loading-screen { display: none !important; }
+}
+
+/* --- Main game layout ---
+   Three rows: header | main | footer.
+   Main splits into two columns: left panel | right panel. */
+
+#game {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* --- Header --- */
+
+#game-header {
+  height: var(--header-height);
+  min-height: var(--header-height);
+  background-color: var(--panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gap-lg);
+  gap: var(--gap-md);
+  flex-shrink: 0; /* never squish */
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.header-badge {
+  font-size: var(--text-xs);
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+}
+
+.header-case {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  letter-spacing: 0.08em;
+}
+
+.header-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--text-bright);
+  letter-spacing: 0.06em;
+  text-align: center;
+  flex: 1;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.header-date {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+.header-status {
+  font-size: var(--text-xs);
+  color: var(--accent);
+  letter-spacing: 0.15em;
+}
+
+/* --- Main two-panel area --- */
+
+#game-main {
+  display: flex;
+  flex: 1;           /* take all remaining height between header and footer */
+  overflow: hidden;  /* panels scroll internally, not the page */
+  min-height: 0;     /* flexbox fix: allow shrinking below content size */
+}
+
+/* --- Left panel (query editor + tabs) --- */
+
+#left-panel {
+  width: var(--left-panel-width);
+  min-width: var(--left-panel-width);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--panel);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* --- Right panel (results output) --- */
+
+#right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg);
+  min-width: 0; /* flexbox fix */
+}
+
+/* --- Footer --- */
+
+#game-footer {
+  height: var(--footer-height);
+  min-height: var(--footer-height);
+  background-color: var(--panel);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gap-lg);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  gap: var(--gap-lg);
+  min-width: 160px;
+}
+
+.footer-right {
+  justify-content: flex-end;
+}
+
+.footer-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-stat {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+}

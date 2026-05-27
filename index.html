@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQL Noir — Case File 74/LKS/1147</title>
+  <meta name="description" content="A murder mystery solved with SQL. Lusaka, 1974." />
+
+  <!-- JetBrains Mono — the typewriter font used throughout the game -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!--
+    sql.js — SQLite compiled to WebAssembly.
+    Loading this as a regular <script> (not a module) puts `initSqlJs`
+    on the global `window` object, where main.js can call it.
+    The ~1 MB WASM file is fetched separately at runtime (see main.js).
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
+
+  <!--
+    Import map — tells the browser where to find CodeMirror 6 modules.
+    Without this, `import { EditorView } from 'codemirror'` would fail
+    because the browser doesn't know what bare module names mean.
+    esm.sh is a CDN that serves npm packages as ES modules.
+  -->
+  <script type="importmap">
+  {
+    "imports": {
+      "codemirror":          "https://esm.sh/codemirror@6.0.1",
+      "@codemirror/state":   "https://esm.sh/@codemirror/state@6.4.1",
+      "@codemirror/view":    "https://esm.sh/@codemirror/view@6.34.3",
+      "@codemirror/lang-sql":"https://esm.sh/@codemirror/lang-sql@6.6.3"
+    }
+  }
+  </script>
+
+  <!-- Stylesheets — split by concern so each file stays focused -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/loading.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       MOBILE GATE
+       Shown on screens narrower than 900px (see layout.css).
+       The rest of the page still renders so share links work on mobile.
+       ============================================================ -->
+  <div id="mobile-gate">
+    <div class="mobile-gate-inner">
+      <div class="mobile-gate-stamp">ZAMBIA POLICE SERVICE</div>
+      <div class="mobile-gate-title">CID HOMICIDE — LUSAKA DIVISION</div>
+      <p class="mobile-gate-message">
+        This case requires a proper desk, detective.<br />
+        Come back at your typewriter.
+      </p>
+      <p class="mobile-gate-sub">
+        SQL Noir is built for keyboard and a wide screen.
+        The briefing and case details are still here if you want to read
+        — but queries need a real desk.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       LOADING SCREEN
+       Shown during sql.js WASM initialisation (~1 MB download).
+       Framed as a police database boot sequence.
+       main.js hides this and shows #game when ready.
+       ============================================================ -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <div class="loading-stamp">ZAMBIA POLICE SERVICE</div>
+      <div class="loading-divider"></div>
+      <div class="loading-dept">CID HOMICIDE — LUSAKA DIVISION</div>
+      <div class="loading-file-number">CASE FILE 74/LKS/1147</div>
+      <div class="loading-subject">KASONDE, VICTOR CHANDA — DECEASED</div>
+      <div class="loading-divider"></div>
+      <div class="loading-status">
+        <span id="loading-status-text">Retrieving case files</span><span class="loading-cursor">_</span>
+      </div>
+      <div class="loading-bar-track">
+        <div class="loading-bar" id="loading-bar"></div>
+      </div>
+      <div id="loading-error" class="loading-error"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN GAME
+       Hidden until loading completes. main.js removes the 'hidden' class.
+       ============================================================ -->
+  <div id="game" class="hidden">
+
+    <!-- Header: case identification and status -->
+    <header id="game-header">
+      <div class="header-left">
+        <div class="header-badge">ZAMBIA POLICE SERVICE — CID</div>
+        <div class="header-case">CASE FILE 74/LKS/1147</div>
+      </div>
+      <div class="header-title">DEATH OF KASONDE, VICTOR CHANDA</div>
+      <div class="header-right">
+        <div class="header-date">LUSAKA, 15 NOVEMBER 1974</div>
+        <div class="header-status" id="header-status">ACTIVE</div>
+      </div>
+    </header>
+
+    <!-- Two-panel main area -->
+    <main id="game-main">
+
+      <!-- ======================================================
+           LEFT PANEL — query editor and reference tabs
+           ====================================================== -->
+      <section id="left-panel">
+
+        <!-- Tab navigation -->
+        <nav class="panel-tabs" role="tablist" aria-label="Left panel tabs">
+          <button
+            class="tab-btn active"
+            data-tab="query"
+            role="tab"
+            aria-selected="true"
+            aria-controls="tab-query"
+          >QUERY</button>
+          <button
+            class="tab-btn"
+            data-tab="briefing"
+            role="tab"
+            aria-selected="false"
+            aria-controls="tab-briefing"
+          >BRIEFING</button>
+          <button
+            class="tab-btn"
+            data-tab="schema"
+            role="tab"
+            aria-selected="false"
+            aria-controls="tab-schema"
+          >SCHEMA</button>
+        </nav>
+
+        <!-- QUERY tab: CodeMirror editor + run button -->
+        <div id="tab-query" class="tab-content active" role="tabpanel">
+          <!--
+            CodeMirror 6 mounts inside this div.
+            codemirror-setup.js creates an EditorView with this element as parent.
+          -->
+          <div id="query-editor-wrap">
+            <div id="query-editor"></div>
+          </div>
+          <div class="query-actions">
+            <button id="run-btn" class="btn btn-primary">RUN QUERY</button>
+            <span class="query-hint">or Ctrl+Enter</span>
+          </div>
+        </div>
+
+        <!-- BRIEFING tab: the superintendent's opening statement -->
+        <div id="tab-briefing" class="tab-content hidden" role="tabpanel">
+          <!--
+            Populated from story.json by ui.js populateBriefing().
+            white-space: pre-wrap in CSS preserves the line breaks.
+          -->
+          <div id="briefing-text" class="briefing-body"></div>
+        </div>
+
+        <!-- SCHEMA tab: table names only, no columns -->
+        <div id="tab-schema" class="tab-content hidden" role="tabpanel">
+          <div class="schema-header">
+            TABLE NAMES ONLY — discover columns by querying.
+          </div>
+          <!--
+            Populated from the live database by ui.js populateSchemaList().
+            Note: confidential_notes does NOT appear here — it's discoverable
+            only by querying sqlite_master directly.
+          -->
+          <ul id="schema-list" class="schema-list" aria-label="Available tables"></ul>
+          <div class="schema-tip">
+            Try: <code>SELECT name FROM sqlite_master WHERE type='table'</code>
+          </div>
+        </div>
+
+      </section><!-- /#left-panel -->
+
+      <!-- ======================================================
+           RIGHT PANEL — query results and output
+           ====================================================== -->
+      <section id="right-panel">
+
+        <div class="results-header">
+          <span class="results-label">CASE FILE OUTPUT</span>
+          <span id="results-count" class="results-count"></span>
+        </div>
+
+        <!-- Results are rendered here by ui.js renderResults() -->
+        <div id="results-area">
+          <div class="results-waiting">
+            <p>Waiting for your first query, detective.</p>
+            <p>The database is open.</p>
+          </div>
+        </div>
+
+      </section><!-- /#right-panel -->
+
+    </main><!-- /#game-main -->
+
+    <!-- Footer: stats and the accusation button -->
+    <footer id="game-footer">
+      <div class="footer-left">
+        <span id="queries-run" class="footer-stat">Queries: 0</span>
+      </div>
+      <div class="footer-center">
+        <!--
+          Filing a formal accusation is the endgame mechanic.
+          The player must get all three correct (suspect + weapon + location).
+          Wrong guesses cost score; only 3 attempts total.
+        -->
+        <button id="accuse-btn" class="btn btn-accuse">
+          FILE FORMAL ACCUSATION
+        </button>
+      </div>
+      <div class="footer-right">
+        <span id="attempts-left" class="footer-stat">Accusations: 3 remaining</span>
+      </div>
+    </footer>
+
+  </div><!-- /#game -->
+
+  <!-- ============================================================
+       ACCUSATION MODAL
+       A Cluedo-style form: select suspect, weapon, location.
+       main.js populates the dropdowns from case.json at open time.
+       ============================================================ -->
+  <div
+    id="accusation-modal"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-stamp" id="modal-title">
+          FORMAL ACCUSATION — CASE 74/LKS/1147
+        </div>
+        <button id="modal-close" class="modal-close" aria-label="Close accusation form">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-intro">
+          You are filing a formal accusation with the Superintendent.
+          All three fields must be correct — a wrong accusation costs you significantly.
+          You have <strong><span id="modal-attempts">3</span></strong> attempt(s) remaining.
+        </p>
+
+        <div class="modal-field">
+          <label class="modal-label" for="accuse-suspect">THE PERPETRATOR</label>
+          <select id="accuse-suspect" class="modal-select"></select>
+        </div>
+
+        <div class="modal-field">
+          <label class="modal-label" for="accuse-weapon">THE METHOD</label>
+          <select id="accuse-weapon" class="modal-select"></select>
+        </div>
+
+        <div class="modal-field">
+          <label class="modal-label" for="accuse-location">THE LOCATION</label>
+          <select id="accuse-location" class="modal-select"></select>
+        </div>
+
+        <!-- Feedback from wrong/correct attempts — populated by main.js -->
+        <div id="accusation-feedback" class="accusation-feedback hidden"></div>
+
+        <div class="modal-actions">
+          <button id="cancel-accusation" class="btn btn-secondary">NOT YET</button>
+          <button id="submit-accusation" class="btn btn-primary">SUBMIT ACCUSATION</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- /#accusation-modal -->
+
+  <!-- Atmospheric overlays — rendered on top of everything, pointer-events: none -->
+  <div class="grain"     aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!--
+    type="module" enables ES module imports (the `import` keyword in main.js).
+    The import map above resolves bare module names like 'codemirror' to CDN URLs.
+    This script tag must come AFTER the import map.
+  -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>

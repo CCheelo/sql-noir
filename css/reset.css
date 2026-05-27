@@ -1,0 +1,44 @@
+/* reset.css — baseline resets so all browsers start from the same place */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* the game is full-screen; panels scroll internally */
+}
+
+/* Remove default list styling */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove default button styling — we apply our own in components.css */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* Make images and SVGs behave predictably */
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Remove default anchor decoration */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Prevent text size inflation on mobile */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}

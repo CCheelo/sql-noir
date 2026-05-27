@@ -1,0 +1,42 @@
+{
+  "briefing": "Sit down, Detective.\n\nVictor Kasonde. Twenty-seven years old. Lead guitarist for a band called Broken String, house act at The Copperbelt Room on Cha Cha Cha Road. Found in the club's rear alley at approximately 01:40 hours by the caretaker, a man named Enos Simukonda. Cause of death: strangulation. The instrument was a guitar string — the low E, steel-wound, heavy gauge. Whoever used it knew what they were doing, or was very angry, or both.\n\nRadio Zambia carried it on the morning news at six. The Times will have something by this afternoon. Kasonde was not nobody — they had broadcast the band twice. The Commissioner has asked, in the way he asks things, that this be handled correctly and promptly.\n\nThe Copperbelt Room has been sealed since 02:15. You have access. The club's owners are Arthur and Grace Mwape. Both have given preliminary statements. Both are cooperating.\n\nOne witness — a bar back, seventeen years old, name of Temwani Phiri — says he observed a woman following Kasonde toward the rear exit at approximately 22:10. He did not see her face. His statement is in the file. He is frightened and young — tread carefully.\n\nThe bouncer was not at his post during the relevant period. He has not explained why.\n\nA man named Choolwe Mutale — the band's booking agent — had a very public argument with Kasonde four days ago about money. He has been asked to remain available.\n\nThe database is open. The Schema tab has your table names. Columns, you find yourself.\n\nMwapoleni (greetings), Detective. Get to work.",
+
+  "blockedMessages": [
+    "This is a precinct database, detective — not your personal filing cabinet. Read-only.",
+    "Tampering with evidence? I will pretend I did not see that.",
+    "The Superintendent would have your badge for that one.",
+    "These records are sealed by the Zambia Police Service. Queries only.",
+    "Iwe — what exactly do you think you are doing with those records?",
+    "That command is not in your authority, detective. Stick to SELECT."
+  ],
+
+  "waitingMessage": "Waiting for your first query, detective.\nThe database is open.",
+  "noResultsMessage": "No records match that query.",
+  "rowCapMessage": "{remaining} more records in the files — narrow your query, detective.",
+  "sqliteMetaNote": "You are querying the database catalogue itself. Chabwino, detective.",
+
+  "accusationMessages": {
+    "wrong": "That is not correct. Think harder — you have {remaining} attempt(s) remaining.",
+    "wrongFinal": "Three wrong accusations. The case goes cold. The file is being referred to another division. The Superintendent is not pleased.",
+    "correct": "That is your killer, detective. File the formal charge."
+  },
+
+  "endingEpilogue": {
+    "open_and_shut": "Grace Mwape is charged, tried in the High Court, and convicted. Arthur sells The Copperbelt Room within two months. Broken String dissolves. Victor Kasonde receives seven column-inches in the Times of Zambia and a short notice on Radio Zambia.\n\nSome cases close clean, detective. Whether they close right is another question.",
+    "whole_truth": "Grace is convicted. The evidence trail you built reaches Superintendent Mbewe's desk and travels, through channels you are not told about, to someone on the UNIP National Council.\n\nSix weeks later, the Times of Zambia runs four paragraphs on page eight: 'Senior NCCM official transferred to coordinating advisory role in Kasama effective 1 January.'\n\nThe Zambia Daily Mail runs nothing.\n\nYou receive a letter of commendation from the Commissioner's office. It thanks you for 'comprehensive and sensitive resolution.' Your superintendent shakes your hand before you leave. He does not usually shake hands.\n\nIn this country, detective, justice does not always make the front page. Sometimes it makes page eight. Sometimes nothing at all. But it happened. You were there.",
+    "justice_with_mercy": "Grace's defence counsel presents the sustained blackmail as mitigation. The High Court judge acknowledges it in sentencing. The term is reduced.\n\nThe Times covers the trial in enough detail that Victor Kasonde's conduct becomes part of the public record. Agnes Lungu gives a short interview to a stringer and says: 'He was complicated. I did not know how much.'\n\nArthur Mwape does not attend the sentencing. He is seen later that month at a bus stop on Cairo Road, alone, waiting for the number twelve.\n\nYou gave the law some context, detective. Whether that was mercy or just more truth — that is not yours to decide either."
+  },
+
+  "rankLabels": [
+    { "label": "Recruit",        "minScore": 0   },
+    { "label": "Constable",      "minScore": 80  },
+    { "label": "Inspector",      "minScore": 200 },
+    { "label": "Superintendent", "minScore": 380 }
+  ],
+
+  "loadingMessages": [
+    "Retrieving case files",
+    "Accessing precinct database",
+    "Initialising case file 74/LKS/1147"
+  ]
+}
