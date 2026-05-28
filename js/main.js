@@ -147,7 +147,7 @@ function handleRunQuery(sqlStr) {
   // Run the query and render the result
   try {
     const result = runQuery(trimmed);
-    renderResults(result, storyData);
+    renderResults(result, storyData, /sqlite_master/i.test(trimmed));
     queriesRun++;
     updateQueriesRun(queriesRun);
 

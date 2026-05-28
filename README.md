@@ -142,20 +142,22 @@ Everything below this line contains case details, including the identity of the 
 
 ---
 
-## Known limitations (Milestone 1)
+## What's in the game
 
-- Only the `people` and `addresses` tables are seeded. Other tables exist but are empty — queries on them return no results.
-- Hints system: not yet implemented.
-- Notebook: not yet implemented.
-- Side threads: defined in the case design but not yet wired into the game logic.
-- Branching endings: only "Open and Shut" is active. The ending text is a stub.
-- Scoring and share codes: not yet implemented.
-- Save state (localStorage): not yet implemented.
+All 14 database tables are fully seeded — the mystery is solvable through SQL queries alone.
 
-## Easy tweaks to try next
+**Tables:** `people`, `addresses`, `phone_calls`, `bank_records`, `interviews`, `crime_scene_reports`, `evidence`, `sightings`, `vehicles`, `club_bookings`, `newspaper_archive`, `precinct_logs`, `relationships` — plus the easter-egg `confidential_notes` table, discoverable only via `sqlite_master`.
 
-1. **Seed more tables** — add `phone_calls`, `interviews`, and `bank_records` data to `case.json`, update `build-seed.js`, and the Schema tab will show them immediately.
-2. **Rename any suspect to a teammate** — change the `name` field in `case.json`, run the build script, refresh.
-3. **Add a new blocked-SQL message** — add a string to `blockedMessages` in `story.json`. No code change needed.
-4. **Adjust the row cap** — change `ROW_CAP = 20` in `js/ui.js` to any number.
-5. **Change the starter query** — edit the `doc:` line in `js/codemirror-setup.js` to pre-fill a different query when the game loads.
+**Features:**
+- Notebook tab auto-populates as you uncover evidence
+- 3-level progressive hints per clue (accessed from the Notebook)
+- 3 branching endings based on which side threads you discovered before accusing
+- Score breakdown and a shareable base64 code on the ending screen
+- Progress saved to localStorage per caseVersion — close the tab and come back
+
+## Easy tweaks
+
+1. **Rename any suspect to a teammate** — change the `name` field in `case.json`, run `node scripts/build-seed.js`, refresh.
+2. **Add a new blocked-SQL message** — add a string to `blockedMessages` in `story.json`. No code change needed.
+3. **Adjust the row cap** — change `ROW_CAP = 20` in `js/ui.js` to any number.
+4. **Change the starter query** — edit the `doc:` line in `js/codemirror-setup.js`.

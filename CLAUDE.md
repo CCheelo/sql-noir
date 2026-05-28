@@ -42,11 +42,13 @@ At runtime, `main.js` fetches all four data files in parallel, initialises the s
 
 | File | Owns |
 |---|---|
-| `js/main.js` | Init sequence, event wiring, app state (queriesRun, attemptsLeft, gameOver), accusation logic, scoring |
-| `js/db.js` | sql.js wrapper only — `initDatabase`, `runQuery`, `getTableNames`, `buildAutocompleteSchema` |
-| `js/blocker.js` | Destructive SQL detection (`isDestructive`) and rotating flavour messages |
-| `js/ui.js` | All DOM manipulation — renders results, errors, blocked messages, loading screen, schema list, ending screen |
-| `js/codemirror-setup.js` | CodeMirror 6 editor init only — mounts editor, wires Ctrl+Enter, exposes `getEditorContent`/`setEditorContent` |
+| `js/main.js` | Init, event wiring, app state, accusation, scoring, ending selection, save/restore |
+| `js/db.js` | sql.js wrapper — `initDatabase`, `runQuery`, `getTableNames`, `buildAutocompleteSchema` |
+| `js/blocker.js` | Destructive SQL detection and rotating flavour messages |
+| `js/hints.js` | 12 clue definitions (trigger regex, notebook text, 3-level hints), `checkTriggers()` |
+| `js/save.js` | `saveState` / `loadState` / `clearState` — localStorage keyed by caseVersion |
+| `js/ui.js` | All DOM manipulation — results, errors, loading, schema list, notebook tab, ending screen |
+| `js/codemirror-setup.js` | CodeMirror 6 editor only — mounts, wires Ctrl+Enter, exposes `getEditorContent` |
 
 ### CDN dependencies (no local install)
 
@@ -65,16 +67,33 @@ Five files, each with a single concern: `reset` → `theme` (CSS variables + gra
 
 ### Accusation mechanic
 
-Three attempts total. `attemptsLeft` lives in `main.js`. A correct accusation compares `suspectId + weaponId + locationId` against `caseData.solution`. Future milestones add branching endings: check `sideThreads` state before calling `showEndingScreen` to pick which epilogue from `storyData.endingEpilogue` to show.
+Three attempts total. `attemptsLeft` in `main.js`. Correct accusation compares `suspectId + weaponId + locationId` against `caseData.solution`.
 
-## Adding content (Milestone 2+)
+### Ending selection (`selectEnding()` in main.js)
 
-**Add a new table with data:**
+Priority:
+1. **The Whole Truth** — `chanda_calls` clue in `foundClueIds`
+2. **Justice with Mercy** — `blackmail_note` AND `bank_blackmail` both found
+3. **Open and Shut** — default
+
+All epilogue text lives in `data/story.json` under `endingEpilogue`.
+
+### Notebook / hints
+
+`js/hints.js` holds the 12 clue definitions. Each has a `triggerPattern` RegExp that fires when any cell value in a query result matches. When triggered, the clue's `notebookEntry` text appears in the NOTES tab. Players can then reveal up to 3 progressive hints per clue.
+
+### Save state
+
+`js/save.js` persists to `localStorage` after every query and hint reveal, keyed as `sql-noir-save-{caseVersion}`. Cleared on game over (correct accusation or all attempts used). Changing `caseVersion` in `case.json` automatically invalidates old saves.
+
+## Adding content
+
+**New table:**
 1. Add `CREATE TABLE IF NOT EXISTS your_table (...)` to `data/schema.sql`.
-2. Add `"your_table": [{ ... }, ...]` to `data/case.json`.
+2. Add `"your_table": [...]` to `data/case.json`.
 3. Add `'your_table'` to `TABLE_ORDER` in `scripts/build-seed.js`.
 4. Run `node scripts/build-seed.js`.
 
-**Add a new hint/clue:** Add to the `"clues"` array in `case.json`. Wire reveal logic into `js/hints.js` (not yet created).
+**New clue:** Add an object to the `CLUES` array in `js/hints.js` with `id`, `label`, `triggerPattern`, `notebookEntry`, and `hints` (array of 3 strings).
 
-**Add a new ending:** Add an epilogue key to `storyData.endingEpilogue` in `story.json`, add the trigger condition to the accusation handler in `main.js`.
+**New ending:** Add a key to `storyData.endingEpilogue` in `story.json`, then add the trigger condition to `selectEnding()` in `main.js`.

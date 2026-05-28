@@ -139,7 +139,7 @@ export function populateBriefing(text) {
  * @param {{ columns: string[], rows: any[][] }} result
  * @param {object} storyData  - from story.json, for the cap and empty messages
  */
-export function renderResults(result, storyData) {
+export function renderResults(result, storyData, isMeta = false) {
   const area     = document.getElementById('results-area');
   const countEl  = document.getElementById('results-count');
   area.innerHTML = '';
@@ -207,6 +207,13 @@ export function renderResults(result, storyData) {
   }
 
   area.appendChild(wrapper);
+
+  if (isMeta && storyData.sqliteMetaNote) {
+    const note = document.createElement('div');
+    note.className = 'result-meta-note';
+    note.textContent = storyData.sqliteMetaNote;
+    area.appendChild(note);
+  }
 }
 
 /**
@@ -303,9 +310,14 @@ export function showEndingScreen(title, epilogue, rank, score) {
     </div>
   `;
 
-  // Disable the accusation button after case is closed
+  // Disable the accusation button and update header status
   const btn = document.getElementById('accuse-btn');
   if (btn) btn.disabled = true;
+  const statusEl = document.getElementById('header-status');
+  if (statusEl) {
+    statusEl.textContent = 'CLOSED';
+    statusEl.style.color = 'var(--text-dim)';
+  }
 
   // Wire up copy button
   const copyBtn = document.getElementById('copy-share-btn');
