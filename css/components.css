@@ -143,6 +143,171 @@
   color: var(--text-secondary);
 }
 
+/* --- ER diagram SVG --- */
+.schema-diagram {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--gap-sm);
+}
+
+.schema-diagram .er-svg {
+  width: 100%;
+  height: auto;
+  min-width: 720px;
+  display: block;
+}
+
+.schema-diagram .er-box rect {
+  fill: var(--panel-raised);
+  stroke: var(--border-light);
+  stroke-width: 1.2;
+}
+
+.schema-diagram .er-box text {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  fill: var(--text-primary);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+.schema-diagram .er-box-hub rect {
+  fill: #2a2014;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+}
+
+.schema-diagram .er-box-hub text {
+  fill: var(--accent);
+  font-weight: 700;
+}
+
+.schema-diagram .er-edge-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--text-dim);
+  letter-spacing: 0.04em;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+}
+
+/* ============================================================
+   LEADS TAB — investigation questions
+   ============================================================ */
+
+#tab-leads {
+  overflow-y: auto;
+}
+
+.leads-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--gap-md) var(--gap-md) var(--gap-sm);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  letter-spacing: 0.12em;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.leads-header-count {
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+.leads-empty {
+  padding: var(--gap-lg) var(--gap-md);
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.leads-divider {
+  height: 1px;
+  background: var(--border);
+  margin: var(--gap-md) 0 0;
+}
+
+.leads-answered-label {
+  padding: var(--gap-md) var(--gap-md) var(--gap-xs);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+}
+
+.lead-card {
+  padding: var(--gap-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.lead-open {
+  background: rgba(212, 168, 67, 0.04);
+  border-left: 3px solid var(--accent);
+}
+
+.lead-answered {
+  opacity: 0.78;
+  border-left: 3px solid var(--text-dim);
+}
+
+.lead-card-head {
+  display: flex;
+  gap: var(--gap-sm);
+  align-items: center;
+  margin-bottom: var(--gap-sm);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+}
+
+.lead-card-num {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.lead-card-stamp {
+  color: var(--success-text);
+  border: 1px solid var(--success-text);
+  padding: 1px 6px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.lead-card-label {
+  color: var(--text-bright);
+}
+
+.lead-card-question {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin-bottom: var(--gap-sm);
+}
+
+.lead-card-question-dim {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.lead-card-note {
+  font-size: var(--text-sm);
+  color: var(--text-bright);
+  line-height: 1.75;
+  padding: var(--gap-sm) var(--gap-md);
+  background: rgba(212, 168, 67, 0.06);
+  border-left: 2px solid var(--accent);
+  margin-top: var(--gap-sm);
+}
+
+.lead-card-hints {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  margin-top: var(--gap-sm);
+}
+
 /* ============================================================
    NOTES TAB — detective's notebook
    ============================================================ */

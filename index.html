@@ -31,10 +31,21 @@
   <script type="importmap">
   {
     "imports": {
-      "codemirror":          "https://esm.sh/codemirror@6.0.1",
+      "codemirror":          "https://esm.sh/*codemirror@6.0.1",
       "@codemirror/state":   "https://esm.sh/@codemirror/state@6.4.1",
-      "@codemirror/view":    "https://esm.sh/@codemirror/view@6.34.3",
-      "@codemirror/lang-sql":"https://esm.sh/@codemirror/lang-sql@6.6.3"
+      "@codemirror/view":    "https://esm.sh/*@codemirror/view@6.34.3",
+      "@codemirror/lang-sql":"https://esm.sh/*@codemirror/lang-sql@6.6.3",
+      "@codemirror/language":"https://esm.sh/*@codemirror/language@6.10.3",
+      "@codemirror/commands": "https://esm.sh/*@codemirror/commands@6.7.1",
+      "@codemirror/autocomplete": "https://esm.sh/*@codemirror/autocomplete@6.18.2",
+      "@codemirror/search":  "https://esm.sh/*@codemirror/search@6.5.6",
+      "@codemirror/lint":    "https://esm.sh/*@codemirror/lint@6.8.2",
+      "@lezer/common":       "https://esm.sh/@lezer/common@1.2.3",
+      "@lezer/highlight":    "https://esm.sh/@lezer/highlight@1.2.1",
+      "@lezer/lr":           "https://esm.sh/*@lezer/lr@1.4.2",
+      "style-mod":           "https://esm.sh/style-mod@4.1.2",
+      "w3c-keyname":         "https://esm.sh/w3c-keyname@2.2.8",
+      "crelt":               "https://esm.sh/crelt@1.0.6"
     }
   }
   </script>
@@ -134,6 +145,13 @@
           >QUERY</button>
           <button
             class="tab-btn"
+            data-tab="leads"
+            role="tab"
+            aria-selected="false"
+            aria-controls="tab-leads"
+          >LEADS<span class="tab-badge hidden" id="leads-badge">0</span></button>
+          <button
+            class="tab-btn"
             data-tab="briefing"
             role="tab"
             aria-selected="false"
@@ -170,6 +188,22 @@
           </div>
         </div>
 
+        <!-- LEADS tab: investigation questions. Open leads at the top,
+             answered leads collapse below with the recovered case-note. -->
+        <div id="tab-leads" class="tab-content hidden" role="tabpanel">
+          <div class="leads-header">
+            <span class="leads-header-label">OUTSTANDING LEADS</span>
+            <span class="leads-header-count" id="leads-counter"></span>
+          </div>
+          <div id="leads-open"></div>
+          <div class="leads-divider" id="leads-divider"></div>
+          <div class="leads-answered-label" id="leads-answered-label">CLOSED LEADS</div>
+          <div id="leads-answered"></div>
+          <div class="leads-empty" id="leads-empty">
+            No leads recorded yet.
+          </div>
+        </div>
+
         <!-- BRIEFING tab: the superintendent's opening statement -->
         <div id="tab-briefing" class="tab-content hidden" role="tabpanel">
           <!--
@@ -179,17 +213,19 @@
           <div id="briefing-text" class="briefing-body"></div>
         </div>
 
-        <!-- SCHEMA tab: table names only, no columns -->
+        <!-- SCHEMA tab: ER diagram of how the tables connect -->
         <div id="tab-schema" class="tab-content hidden" role="tabpanel">
           <div class="schema-header">
-            TABLE NAMES ONLY — discover columns by querying.
+            CASE FILE STRUCTURE — table names and how they link.
+            Discover columns by querying.
           </div>
           <!--
-            Populated from the live database by ui.js populateSchemaList().
+            Populated by ui.js populateSchemaDiagram(). An inline SVG with
+            one box per table and arrows showing foreign-key relationships.
             Note: confidential_notes does NOT appear here — it's discoverable
             only by querying sqlite_master directly.
           -->
-          <ul id="schema-list" class="schema-list" aria-label="Available tables"></ul>
+          <div id="schema-diagram" class="schema-diagram" aria-label="Table relationship diagram"></div>
           <div class="schema-tip">
             Try: <code>SELECT name FROM sqlite_master WHERE type='table'</code>
           </div>

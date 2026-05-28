@@ -82,24 +82,132 @@ export function initTabs(onTabChange) {
 }
 
 // ============================================================
-// SCHEMA LIST
+// SCHEMA DIAGRAM
 // ============================================================
 
+// Hand-tuned layout for the ER diagram. Coordinates are in SVG units;
+// the SVG itself uses viewBox so it scales to whatever the container is.
+// `people` and `addresses` are placed in the middle; person-only tables
+// orbit the left and bottom, address-using tables stay on the right.
+const DIAGRAM_W = 1180;
+const DIAGRAM_H = 720;
+const BOX_W = 158;
+const BOX_H = 44;
+
+const SCHEMA_LAYOUT = {
+  people:              { x: 460, y: 320, kind: 'hub' },
+  addresses:           { x: 760, y: 320, kind: 'hub' },
+
+  phone_calls:         { x:  40, y:  40 },
+  interviews:          { x: 220, y:  40 },
+  vehicles:            { x: 400, y:  40 },
+  club_bookings:       { x: 580, y:  40 },
+  sightings:           { x: 760, y:  40 },
+  crime_scene_reports: { x: 960, y:  40 },
+
+  bank_records:        { x:  40, y: 200 },
+  precinct_logs:       { x:  40, y: 320 },
+  relationships:       { x:  40, y: 440 },
+
+  newspaper_archive:   { x: 380, y: 580 },
+  evidence:            { x: 960, y: 200 },
+};
+
+// [fromTable, fromCol(s), toTable]
+const SCHEMA_RELATIONS = [
+  ['people',              'address_id',                 'addresses'],
+  ['phone_calls',         'caller_id, receiver_id',     'people'],
+  ['interviews',          'subject_id, officer_id',     'people'],
+  ['vehicles',            'owner_id',                   'people'],
+  ['club_bookings',       'performer_id',               'people'],
+  ['bank_records',        'person_id',                  'people'],
+  ['precinct_logs',       'officer_id',                 'people'],
+  ['relationships',       'person_a_id, person_b_id',   'people'],
+  ['newspaper_archive',   'author_id',                  'people'],
+  ['sightings',           'subject_id, witness_id',     'people'],
+  ['sightings',           'location_id',                'addresses'],
+  ['crime_scene_reports', 'location_id',                'addresses'],
+  ['crime_scene_reports', 'officer_id',                 'people'],
+  ['evidence',            'report_id',                  'crime_scene_reports'],
+];
+
+// Compute the anchor point on a box's perimeter closest to a target point.
+function anchorPoint(box, targetX, targetY) {
+  const cx = box.x + BOX_W / 2;
+  const cy = box.y + BOX_H / 2;
+  const dx = targetX - cx;
+  const dy = targetY - cy;
+  const halfW = BOX_W / 2;
+  const halfH = BOX_H / 2;
+
+  // Find which edge the line crosses by comparing slopes
+  if (dx === 0 && dy === 0) return { x: cx, y: cy };
+  const scaleX = halfW / Math.abs(dx || 1);
+  const scaleY = halfH / Math.abs(dy || 1);
+  const scale  = Math.min(scaleX, scaleY);
+  return { x: cx + dx * scale, y: cy + dy * scale };
+}
+
 /**
- * Populates the Schema tab with a list of table names.
- * Players see the names but must discover columns by querying.
+ * Builds the schema ER diagram in the #schema-diagram element.
  *
- * @param {string[]} tableNames
+ * @param {string[]} tableNames  — public tables (excludes confidential_notes)
  */
-export function populateSchemaList(tableNames) {
-  const list = document.getElementById('schema-list');
-  if (!list) return;
-  list.innerHTML = '';
-  for (const name of tableNames) {
-    const li = document.createElement('li');
-    li.textContent = name;
-    list.appendChild(li);
+export function populateSchemaDiagram(tableNames) {
+  const host = document.getElementById('schema-diagram');
+  if (!host) return;
+
+  const present = new Set(tableNames);
+  const tables  = Object.entries(SCHEMA_LAYOUT)
+    .filter(([id]) => present.has(id));
+
+  // Build SVG by string concatenation — simple and avoids namespace ceremony
+  const lines = [];
+  for (const [from, cols, to] of SCHEMA_RELATIONS) {
+    if (!present.has(from) || !present.has(to)) continue;
+    const a = SCHEMA_LAYOUT[from];
+    const b = SCHEMA_LAYOUT[to];
+    const bCx = b.x + BOX_W / 2;
+    const bCy = b.y + BOX_H / 2;
+    const aCx = a.x + BOX_W / 2;
+    const aCy = a.y + BOX_H / 2;
+    const p1 = anchorPoint(a, bCx, bCy);
+    const p2 = anchorPoint(b, aCx, aCy);
+    const midX = (p1.x + p2.x) / 2;
+    const midY = (p1.y + p2.y) / 2;
+    lines.push(`
+      <line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}"
+            stroke="#5a4520" stroke-width="1.4" marker-end="url(#arrow)" />
+      <text x="${midX}" y="${midY - 4}" class="er-edge-label"
+            text-anchor="middle">${cols}</text>
+    `);
   }
+
+  const boxes = tables.map(([id, pos]) => {
+    const cls = pos.kind === 'hub' ? 'er-box er-box-hub' : 'er-box';
+    return `
+      <g class="${cls}" transform="translate(${pos.x}, ${pos.y})">
+        <rect width="${BOX_W}" height="${BOX_H}" rx="4" ry="4" />
+        <text x="${BOX_W / 2}" y="${BOX_H / 2 + 5}" text-anchor="middle">${id}</text>
+      </g>
+    `;
+  }).join('');
+
+  host.innerHTML = `
+    <svg viewBox="0 0 ${DIAGRAM_W} ${DIAGRAM_H}"
+         preserveAspectRatio="xMidYMid meet"
+         xmlns="http://www.w3.org/2000/svg"
+         class="er-svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a7035" />
+        </marker>
+      </defs>
+      ${lines.join('')}
+      ${boxes}
+    </svg>
+  `;
 }
 
 // ============================================================
@@ -327,6 +435,103 @@ export function showEndingScreen(title, epilogue, rank, score) {
         }
       });
     });
+  }
+}
+
+// ============================================================
+// LEADS
+// ============================================================
+
+/**
+ * Renders the LEADS tab: outstanding questions on top, answered ones below.
+ * Outstanding leads are the ones whose `dependsOn` are satisfied but whose
+ * trigger hasn't fired yet. Answered leads show the recovered case-note.
+ *
+ * @param {object[]} visibleClues   — clues whose dependencies are met
+ * @param {Set<string>} foundClueIds — ids that have been triggered (answered)
+ * @param {object} hintsRevealed    — { clueId: number 0–3 }
+ * @param {Function} onRevealHint   — callback(clueId)
+ */
+export function renderLeads(visibleClues, foundClueIds, hintsRevealed, onRevealHint) {
+  const openEl     = document.getElementById('leads-open');
+  const answeredEl = document.getElementById('leads-answered');
+  const dividerEl  = document.getElementById('leads-divider');
+  const answeredLb = document.getElementById('leads-answered-label');
+  const emptyEl    = document.getElementById('leads-empty');
+  const counterEl  = document.getElementById('leads-counter');
+  if (!openEl || !answeredEl) return;
+
+  const open     = visibleClues.filter(c => !foundClueIds.has(c.id));
+  const answered = visibleClues.filter(c =>  foundClueIds.has(c.id));
+
+  if (counterEl) {
+    counterEl.textContent = `${open.length} open · ${answered.length} closed`;
+  }
+
+  if (emptyEl) emptyEl.classList.toggle('hidden', visibleClues.length > 0);
+  if (dividerEl) dividerEl.classList.toggle('hidden', answered.length === 0);
+  if (answeredLb) answeredLb.classList.toggle('hidden', answered.length === 0);
+
+  openEl.innerHTML = open.map((clue, i) => {
+    const revealed  = hintsRevealed[clue.id] || 0;
+    const hintsHtml = clue.hints.slice(0, revealed).map((h, idx) => `
+      <div class="hint-item">
+        <span class="hint-num">HINT ${idx + 1}</span>
+        <span class="hint-text">${escapeHtml(h)}</span>
+      </div>
+    `).join('');
+
+    let btnHtml = '';
+    if (revealed < clue.hints.length) {
+      const label = revealed === 0
+        ? 'NEED A HINT'
+        : `NEXT HINT (${revealed}/${clue.hints.length})`;
+      btnHtml = `<button class="btn-hint" data-clue="${escapeHtml(clue.id)}">${label}</button>`;
+    } else {
+      btnHtml = '<span class="hint-exhausted">All hints revealed.</span>';
+    }
+
+    return `
+      <div class="lead-card lead-open">
+        <div class="lead-card-head">
+          <span class="lead-card-num">LEAD ${i + 1}</span>
+          <span class="lead-card-label">${escapeHtml(clue.label)}</span>
+        </div>
+        <div class="lead-card-question">${escapeHtml(clue.question)}</div>
+        <div class="lead-card-hints">${hintsHtml}${btnHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  answeredEl.innerHTML = answered.map(clue => `
+    <div class="lead-card lead-answered">
+      <div class="lead-card-head">
+        <span class="lead-card-stamp">ANSWERED</span>
+        <span class="lead-card-label">${escapeHtml(clue.label)}</span>
+      </div>
+      <div class="lead-card-question lead-card-question-dim">
+        ${escapeHtml(clue.question)}
+      </div>
+      <div class="lead-card-note">${escapeHtml(clue.notebookEntry)}</div>
+    </div>
+  `).join('');
+
+  // Hint clicks (delegated)
+  openEl.onclick = (e) => {
+    const btn = e.target.closest('.btn-hint');
+    if (btn) onRevealHint(btn.dataset.clue);
+  };
+}
+
+/** Sets the badge count on the LEADS tab. Hides at 0. */
+export function updateLeadsBadge(count) {
+  const badge = document.getElementById('leads-badge');
+  if (!badge) return;
+  if (count > 0) {
+    badge.textContent = count;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
   }
 }
 

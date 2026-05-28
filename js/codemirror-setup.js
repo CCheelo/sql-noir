@@ -10,9 +10,11 @@
 // The import map in index.html tells the browser where to find each module
 // (from the esm.sh CDN). We import only what we need here.
 
-import { EditorView, basicSetup, keymap } from 'codemirror';
-import { EditorState }                    from '@codemirror/state';
-import { sql, SQLite }                    from '@codemirror/lang-sql';
+import { EditorView, basicSetup } from 'codemirror';
+import { keymap }                 from '@codemirror/view';
+import { EditorState, Prec }      from '@codemirror/state';
+import { sql, SQLite }            from '@codemirror/lang-sql';
+import { acceptCompletion, completionStatus } from '@codemirror/autocomplete';
 
 /**
  * Mounts a CodeMirror editor into `element`.
@@ -73,19 +75,46 @@ export function initEditor(element, schema, onRun) {
         backgroundColor: 'rgba(200, 168, 75, 0.05)',
         color:           'var(--text-secondary)',
       },
-      // Autocomplete popup
+      // Autocomplete popup — boosted contrast so suggestions read
+      // clearly against the dark amber background
       '.cm-tooltip': {
-        backgroundColor: 'var(--panel-raised)',
-        border:          '1px solid var(--border)',
-        color:           'var(--text-primary)',
+        backgroundColor: '#241e16',
+        border:          '1px solid #6b5226',
+        color:           '#f0e6cf',
+        boxShadow:       '0 4px 14px rgba(0, 0, 0, 0.6)',
       },
-      '.cm-tooltip-autocomplete ul': {
-        fontFamily: 'var(--font-mono)',
-        fontSize:   'var(--text-sm)',
+      '.cm-tooltip.cm-tooltip-autocomplete > ul': {
+        fontFamily:      'var(--font-mono)',
+        fontSize:        'var(--text-sm)',
+        maxHeight:       '14em',
       },
-      '.cm-tooltip-autocomplete ul li[aria-selected]': {
-        backgroundColor: 'var(--border)',
-        color:           'var(--text-bright)',
+      '.cm-tooltip.cm-tooltip-autocomplete > ul > li': {
+        padding:         '3px 8px',
+        color:           '#f0e6cf',
+      },
+      '.cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected]': {
+        backgroundColor: '#d4a843',
+        color:           '#100c06',
+      },
+      '.cm-completionLabel': {
+        color:           'inherit',
+      },
+      '.cm-completionDetail': {
+        color:           '#a89868',
+        fontStyle:       'normal',
+        marginLeft:      '8px',
+      },
+      '.cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail': {
+        color:           '#3a2c0a',
+      },
+      '.cm-completionMatchedText': {
+        color:           '#ffd76a',
+        textDecoration:  'none',
+        fontWeight:      '700',
+      },
+      '.cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionMatchedText': {
+        color:           '#100c06',
+        textDecoration:  'underline',
       },
       // Make the editor scrollbar match the theme
       '.cm-scroller': {
@@ -93,18 +122,30 @@ export function initEditor(element, schema, onRun) {
       },
     }, { dark: true }),
 
-    // Keyboard shortcut: Ctrl+Enter (or Cmd+Enter on Mac) runs the query.
-    // Returning `true` tells CodeMirror the event was handled (stops propagation).
-    keymap.of([
-      {
-        key:  'Ctrl-Enter',
-        mac:  'Cmd-Enter',
-        run:  (view) => {
-          onRun(view.state.doc.toString());
-          return true;
+    // Keyboard shortcuts. Wrapped in Prec.highest because basicSetup's
+    // defaultKeymap binds Mod-Enter to insertBlankLine — without raising
+    // precedence, that handler swallows our Ctrl+Enter.
+    Prec.highest(
+      keymap.of([
+        {
+          key: 'Tab',
+          run: (view) => {
+            if (completionStatus(view.state) === 'active') {
+              return acceptCompletion(view);
+            }
+            return false;
+          },
         },
-      },
-    ]),
+        {
+          key:  'Ctrl-Enter',
+          mac:  'Cmd-Enter',
+          run:  (view) => {
+            onRun(view.state.doc.toString());
+            return true;
+          },
+        },
+      ])
+    ),
   ];
 
   const state = EditorState.create({

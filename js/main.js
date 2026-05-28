@@ -18,12 +18,13 @@ import { initDatabase, runQuery, getTableNames, buildAutocompleteSchema } from '
 import { isDestructive, setBlockedMessages, getBlockedMessage }           from './blocker.js';
 import {
   showLoadingScreen, setLoadingProgress, setLoadingStatus, showGame, showLoadingError,
-  initTabs, populateSchemaList, populateBriefing,
+  initTabs, populateSchemaDiagram, populateBriefing,
   renderResults, renderError, renderBlocked,
   updateQueriesRun, updateAttemptsLeft, showEndingScreen,
   renderNotebook, updateNotebookBadge,
+  renderLeads, updateLeadsBadge,
 } from './ui.js';
-import { CLUES, checkTriggers }         from './hints.js';
+import { CLUES, checkTriggers, getVisibleClues } from './hints.js';
 import { saveState, loadState, clearState } from './save.js';
 
 // ============================================================
@@ -43,7 +44,7 @@ let foundClues          = [];          // clue objects in discovery order
 let foundClueIds        = new Set();   // for fast membership checks
 let hintsRevealed       = {};          // { clueId: number (0-3) }
 let hintsUsedTotal      = 0;
-let newEntriesSinceView = 0;           // badge count
+let newEntriesSinceView = 0;           // NOTES badge count
 
 // ============================================================
 // INIT
@@ -118,7 +119,10 @@ async function init() {
     // confidential_notes is the easter egg — exclude it from the Schema tab.
     // Players discover it by querying sqlite_master directly.
     const publicTables = getTableNames().filter(t => t !== 'confidential_notes');
-    populateSchemaList(publicTables);
+    populateSchemaDiagram(publicTables);
+
+    // Initial LEADS render — opening leads are visible before any query runs
+    refreshLeads();
 
     // --- Step 7: Restore saved game state (if any) ---
     restoreSavedState();
@@ -175,6 +179,7 @@ function handleRunQuery(sqlStr) {
       }
       updateNotebookBadge(newEntriesSinceView);
       renderNotebook(foundClues, hintsRevealed, handleRevealHint);
+      refreshLeads();
     }
 
     persistState();
@@ -194,7 +199,16 @@ function handleRevealHint(clueId) {
   hintsRevealed[clueId] = current + 1;
   hintsUsedTotal++;
   renderNotebook(foundClues, hintsRevealed, handleRevealHint);
+  refreshLeads();
   persistState();
+}
+
+// Re-renders the LEADS tab and updates its badge to the count of open leads.
+function refreshLeads() {
+  const visible = getVisibleClues(foundClueIds);
+  renderLeads(visible, foundClueIds, hintsRevealed, handleRevealHint);
+  const openCount = visible.filter(c => !foundClueIds.has(c.id)).length;
+  updateLeadsBadge(openCount);
 }
 
 // ============================================================
@@ -386,6 +400,7 @@ function restoreSavedState() {
   updateAttemptsLeft(attemptsLeft);
   if (newEntriesSinceView > 0) updateNotebookBadge(newEntriesSinceView);
   if (foundClues.length > 0) renderNotebook(foundClues, hintsRevealed, handleRevealHint);
+  refreshLeads();
 }
 
 // ============================================================
