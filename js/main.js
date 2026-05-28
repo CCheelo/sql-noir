@@ -24,7 +24,8 @@ import {
   renderNotebook, updateNotebookBadge,
 } from './ui.js';
 import { initEditor, getEditorContent } from './codemirror-setup.js';
-import { checkTriggers }                from './hints.js';
+import { CLUES, checkTriggers }         from './hints.js';
+import { saveState, loadState, clearState } from './save.js';
 
 // ============================================================
 // STATE
@@ -106,10 +107,13 @@ async function init() {
     const publicTables = getTableNames().filter(t => t !== 'confidential_notes');
     populateSchemaList(publicTables);
 
-    // --- Step 7: Wire up event listeners ---
+    // --- Step 7: Restore saved game state (if any) ---
+    restoreSavedState();
+
+    // --- Step 8: Wire up event listeners ---
     setupEventListeners();
 
-    // --- Step 8: Show the game ---
+    // --- Step 9: Show the game ---
     showGame();
 
   } catch (err) {
@@ -159,6 +163,8 @@ function handleRunQuery(sqlStr) {
       updateNotebookBadge(newEntriesSinceView);
       renderNotebook(foundClues, hintsRevealed, handleRevealHint);
     }
+
+    persistState();
   } catch (err) {
     // sql.js throws on syntax errors — show the message in the results panel
     renderError(err.message);
@@ -175,6 +181,7 @@ function handleRevealHint(clueId) {
   hintsRevealed[clueId] = current + 1;
   hintsUsedTotal++;
   renderNotebook(foundClues, hintsRevealed, handleRevealHint);
+  persistState();
 }
 
 // ============================================================
@@ -281,6 +288,7 @@ function handleAccusation() {
     // Correct accusation — show success, then the ending
     showAccusationFeedback(storyData.accusationMessages.correct, 'correct');
     gameOver = true;
+    clearState(caseData.caseVersion);
     setTimeout(() => {
       closeAccusationModal();
       const { endingKey, endingTitle } = selectEnding();
@@ -299,12 +307,14 @@ function handleAccusation() {
     if (attemptsLeft <= 0) {
       showAccusationFeedback(storyData.accusationMessages.wrongFinal, 'gameover');
       gameOver = true;
+      clearState(caseData.caseVersion);
       setTimeout(() => {
         closeAccusationModal();
         showEndingScreen(
           'Case Closed — Unsolved',
           'Three wrong accusations. The file is referred to another division.\n\nThe Superintendent is not pleased. The case goes cold.',
-          'Recruit'
+          'Recruit',
+          null
         );
       }, 2000);
     } else {
@@ -319,6 +329,50 @@ function showAccusationFeedback(message, type) {
   const el = document.getElementById('accusation-feedback');
   el.textContent = message;
   el.className   = `accusation-feedback ${type}`;
+}
+
+// ============================================================
+// SAVE STATE
+// ============================================================
+
+function persistState() {
+  if (!caseData || gameOver) return;
+  saveState(caseData.caseVersion, {
+    queriesRun,
+    attemptsLeft,
+    hintsUsedTotal,
+    newEntriesSinceView,
+    foundClueIds:  [...foundClueIds],
+    hintsRevealed,
+  });
+}
+
+function restoreSavedState() {
+  if (!caseData) return;
+  const saved = loadState(caseData.caseVersion);
+  if (!saved) return;
+
+  queriesRun          = saved.queriesRun          || 0;
+  attemptsLeft        = saved.attemptsLeft        ?? 3;
+  hintsUsedTotal      = saved.hintsUsedTotal      || 0;
+  newEntriesSinceView = saved.newEntriesSinceView || 0;
+  hintsRevealed       = saved.hintsRevealed       || {};
+
+  // Rebuild foundClues array and foundClueIds Set from saved IDs
+  const savedIds = saved.foundClueIds || [];
+  for (const id of savedIds) {
+    const clue = CLUES.find(c => c.id === id);
+    if (clue && !foundClueIds.has(id)) {
+      foundClues.push(clue);
+      foundClueIds.add(id);
+    }
+  }
+
+  // Sync UI with restored state
+  updateQueriesRun(queriesRun);
+  updateAttemptsLeft(attemptsLeft);
+  if (newEntriesSinceView > 0) updateNotebookBadge(newEntriesSinceView);
+  if (foundClues.length > 0) renderNotebook(foundClues, hintsRevealed, handleRevealHint);
 }
 
 // ============================================================
