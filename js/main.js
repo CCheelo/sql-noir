@@ -23,7 +23,6 @@ import {
   updateQueriesRun, updateAttemptsLeft, showEndingScreen,
   renderNotebook, updateNotebookBadge,
 } from './ui.js';
-import { initEditor, getEditorContent } from './codemirror-setup.js';
 import { CLUES, checkTriggers }         from './hints.js';
 import { saveState, loadState, clearState } from './save.js';
 
@@ -31,12 +30,13 @@ import { saveState, loadState, clearState } from './save.js';
 // STATE
 // ============================================================
 
-let queriesRun    = 0;
-let attemptsLeft  = 3;
-let caseData      = null;  // parsed case.json
-let storyData     = null;  // parsed story.json
-let editorView    = null;  // CodeMirror EditorView instance
-let gameOver      = false;
+let queriesRun       = 0;
+let attemptsLeft     = 3;
+let caseData         = null;  // parsed case.json
+let storyData        = null;  // parsed story.json
+let editorView       = null;  // CodeMirror EditorView instance
+let getEditorContent = null;  // assigned after dynamic import of codemirror-setup.js
+let gameOver         = false;
 
 // Notebook state
 let foundClues          = [];          // clue objects in discovery order
@@ -94,12 +94,16 @@ async function init() {
     // table names and column names as the player types.
     const schema = buildAutocompleteSchema();
 
-    // --- Step 5: Mount the CodeMirror editor ---
+    // --- Step 5: Load CodeMirror from CDN and mount the editor ---
+    // Dynamic import here (not at the top of the file) so the CDN fetch
+    // happens as a visible loading step rather than silently blocking init.
     setLoadingStatus('Mounting editor');
-    editorView = initEditor(
+    const cmSetup = await import('./codemirror-setup.js');
+    getEditorContent = cmSetup.getEditorContent;
+    editorView = cmSetup.initEditor(
       document.getElementById('query-editor'),
       schema,
-      handleRunQuery, // called when the player presses Ctrl+Enter or Run
+      handleRunQuery,
     );
     setLoadingProgress(95);
 
