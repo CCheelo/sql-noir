@@ -143,6 +143,13 @@
             aria-selected="false"
             aria-controls="tab-schema"
           >SCHEMA</button>
+          <button
+            class="tab-btn"
+            data-tab="notes"
+            role="tab"
+            aria-selected="false"
+            aria-controls="tab-notes"
+          >NOTES<span class="tab-badge hidden" id="notes-badge">0</span></button>
         </nav>
 
         <!-- QUERY tab: CodeMirror editor + run button -->
@@ -182,6 +189,15 @@
           <ul id="schema-list" class="schema-list" aria-label="Available tables"></ul>
           <div class="schema-tip">
             Try: <code>SELECT name FROM sqlite_master WHERE type='table'</code>
+          </div>
+        </div>
+
+        <!-- NOTES tab: detective's notebook, auto-populates from query results -->
+        <div id="tab-notes" class="tab-content hidden" role="tabpanel">
+          <div class="notebook-header">DETECTIVE'S NOTEBOOK</div>
+          <div id="notebook-entries"></div>
+          <div class="notebook-empty" id="notebook-empty">
+            No entries yet. Run queries to investigate.
           </div>
         </div>
 

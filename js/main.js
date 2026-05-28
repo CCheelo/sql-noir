@@ -21,8 +21,10 @@ import {
   initTabs, populateSchemaList, populateBriefing,
   renderResults, renderError, renderBlocked,
   updateQueriesRun, updateAttemptsLeft, showEndingScreen,
+  renderNotebook, updateNotebookBadge,
 } from './ui.js';
 import { initEditor, getEditorContent } from './codemirror-setup.js';
+import { checkTriggers }                from './hints.js';
 
 // ============================================================
 // STATE
@@ -34,6 +36,13 @@ let caseData      = null;  // parsed case.json
 let storyData     = null;  // parsed story.json
 let editorView    = null;  // CodeMirror EditorView instance
 let gameOver      = false;
+
+// Notebook state
+let foundClues          = [];          // clue objects in discovery order
+let foundClueIds        = new Set();   // for fast membership checks
+let hintsRevealed       = {};          // { clueId: number (0-3) }
+let hintsUsedTotal      = 0;
+let newEntriesSinceView = 0;           // badge count
 
 // ============================================================
 // INIT
@@ -85,7 +94,12 @@ async function init() {
     setLoadingProgress(95);
 
     // --- Step 6: Populate static UI panels ---
-    initTabs();
+    initTabs((tab) => {
+      if (tab === 'notes') {
+        newEntriesSinceView = 0;
+        updateNotebookBadge(0);
+      }
+    });
     populateBriefing(storyData.briefing);
     // confidential_notes is the easter egg — exclude it from the Schema tab.
     // Players discover it by querying sqlite_master directly.
@@ -132,10 +146,35 @@ function handleRunQuery(sqlStr) {
     renderResults(result, storyData);
     queriesRun++;
     updateQueriesRun(queriesRun);
+
+    // Check whether the results triggered any new notebook entries
+    const newClues = checkTriggers(result, foundClueIds);
+    if (newClues.length > 0) {
+      for (const clue of newClues) {
+        foundClues.push(clue);
+        foundClueIds.add(clue.id);
+        hintsRevealed[clue.id] = 0;
+        newEntriesSinceView++;
+      }
+      updateNotebookBadge(newEntriesSinceView);
+      renderNotebook(foundClues, hintsRevealed, handleRevealHint);
+    }
   } catch (err) {
     // sql.js throws on syntax errors — show the message in the results panel
     renderError(err.message);
   }
+}
+
+/**
+ * Reveals the next hint level for a clue.
+ * Called by the hint button in the notebook.
+ */
+function handleRevealHint(clueId) {
+  const current = hintsRevealed[clueId] || 0;
+  if (current >= 3) return;
+  hintsRevealed[clueId] = current + 1;
+  hintsUsedTotal++;
+  renderNotebook(foundClues, hintsRevealed, handleRevealHint);
 }
 
 // ============================================================
@@ -247,7 +286,7 @@ function handleAccusation() {
       // For Milestone 1 there is one stub ending.
       // Future milestones will branch based on side threads found.
       const epilogue = storyData.endingEpilogue.open_and_shut;
-      const rank     = getDetectiveRank(queriesRun, 0, attemptsLeft);
+      const rank     = getDetectiveRank(queriesRun, hintsUsedTotal, attemptsLeft);
       showEndingScreen('Open and Shut', epilogue, rank);
     }, 1800);
 

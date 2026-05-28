@@ -70,7 +70,7 @@ export function showLoadingError(message) {
  * Wires up tab switching for the left panel.
  * Each button has data-tab="query"|"briefing"|"schema".
  */
-export function initTabs() {
+export function initTabs(onTabChange) {
   const buttons  = document.querySelectorAll('.tab-btn');
   const contents = document.querySelectorAll('.tab-content');
 
@@ -86,6 +86,8 @@ export function initTabs() {
       contents.forEach(c => {
         c.classList.toggle('hidden', c.id !== `tab-${target}`);
       });
+
+      if (onTabChange) onTabChange(target);
     });
   });
 }
@@ -285,6 +287,81 @@ export function showEndingScreen(title, epilogue, rank) {
   // Disable the accusation button after case is closed
   const btn = document.getElementById('accuse-btn');
   if (btn) btn.disabled = true;
+}
+
+// ============================================================
+// NOTEBOOK
+// ============================================================
+
+/**
+ * Renders all discovered clues into the NOTES tab.
+ * Each entry shows the notebook text and progressive hints on demand.
+ *
+ * @param {object[]} foundClues     - triggered clue objects in discovery order
+ * @param {object}   hintsRevealed  - { clueId: number (0–3) }
+ * @param {Function} onRevealHint   - callback(clueId) when hint button is clicked
+ */
+export function renderNotebook(foundClues, hintsRevealed, onRevealHint) {
+  const container = document.getElementById('notebook-entries');
+  const emptyEl   = document.getElementById('notebook-empty');
+  if (!container) return;
+
+  if (foundClues.length === 0) {
+    container.innerHTML = '';
+    if (emptyEl) emptyEl.classList.remove('hidden');
+    return;
+  }
+
+  if (emptyEl) emptyEl.classList.add('hidden');
+
+  container.innerHTML = foundClues.map(clue => {
+    const revealed    = hintsRevealed[clue.id] || 0;
+    const hintsHtml   = clue.hints.slice(0, revealed).map((h, i) => `
+      <div class="hint-item">
+        <span class="hint-num">HINT ${i + 1}</span>
+        <span class="hint-text">${escapeHtml(h)}</span>
+      </div>
+    `).join('');
+
+    let btnHtml = '';
+    if (revealed < clue.hints.length) {
+      const label = revealed === 0 ? 'GET HINT' : `NEXT HINT (${revealed}/${clue.hints.length})`;
+      btnHtml = `<button class="btn-hint" data-clue="${escapeHtml(clue.id)}">${label}</button>`;
+    } else {
+      btnHtml = '<span class="hint-exhausted">All hints revealed.</span>';
+    }
+
+    return `
+      <div class="notebook-entry">
+        <div class="notebook-entry-label">${escapeHtml(clue.label)}</div>
+        <div class="notebook-entry-text">${escapeHtml(clue.notebookEntry)}</div>
+        <div class="notebook-hints">${hintsHtml}${btnHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Replace handler each render — avoids stale closures
+  container.onclick = (e) => {
+    const btn = e.target.closest('.btn-hint');
+    if (btn) onRevealHint(btn.dataset.clue);
+  };
+}
+
+/**
+ * Updates the badge count on the NOTES tab button.
+ * Hides the badge when count is 0.
+ *
+ * @param {number} count
+ */
+export function updateNotebookBadge(count) {
+  const badge = document.getElementById('notes-badge');
+  if (!badge) return;
+  if (count > 0) {
+    badge.textContent = count;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
 }
 
 // ============================================================
