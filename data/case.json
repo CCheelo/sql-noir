@@ -224,28 +224,28 @@
   ],
 
   "addresses": [
-    { "id": "addr_northmead_flat_1",  "street": "14B Bwacha Road",            "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
-    { "id": "addr_northmead_flat_2",  "street": "7 Bwacha Road",              "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
-    { "id": "addr_northmead_house",   "street": "22 Lumumba Road",            "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
-    { "id": "addr_kabulonga_house",   "street": "4 Leopards Hill Road",       "neighborhood": "Kabulonga",   "city": "Lusaka", "type": "residence" },
-    { "id": "addr_kabulonga_flat",    "street": "11A Leopards Hill Road",     "neighborhood": "Kabulonga",   "city": "Lusaka", "type": "residence" },
-    { "id": "addr_chilenje_1",        "street": "33 Chilenje South",          "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
-    { "id": "addr_chilenje_2",        "street": "18 Chilenje South",          "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
-    { "id": "addr_chilenje_3",        "street": "9 Chilenje North",           "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
-    { "id": "addr_chilenje_4",        "street": "27 Chilenje South",          "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
-    { "id": "addr_matero_flat_1",     "street": "5 Freedom Way",              "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
-    { "id": "addr_matero_flat_2",     "street": "12 Freedom Way",             "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
-    { "id": "addr_matero_flat_3",     "street": "3 Freedom Way",              "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
-    { "id": "addr_woodlands_flat_1",  "street": "8 Addis Ababa Drive",        "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
-    { "id": "addr_woodlands_house_1", "street": "19 Addis Ababa Drive",       "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
-    { "id": "addr_woodlands_house_2", "street": "31 Addis Ababa Drive",       "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
-    { "id": "addr_rhodes_park_1",     "street": "2 Independence Avenue",      "neighborhood": "Rhodes Park", "city": "Lusaka", "type": "residence" },
-    { "id": "addr_rhodes_park_2",     "street": "15 Independence Avenue",     "neighborhood": "Rhodes Park", "city": "Lusaka", "type": "residence" },
-    { "id": "addr_kamwala_1",         "street": "Kamwala Market, Stand 44",   "neighborhood": "Kamwala",     "city": "Lusaka", "type": "business" },
-    { "id": "addr_copperbelt_room",   "street": "12 Cha Cha Cha Road",        "neighborhood": "City Centre", "city": "Lusaka", "type": "venue" },
-    { "id": "addr_copperbelt_alley",  "street": "Rear alley, 12 Cha Cha Cha Road", "neighborhood": "City Centre", "city": "Lusaka", "type": "crime_scene" },
-    { "id": "addr_ridgeway_lounge",   "street": "Ridgeway Hotel, Church Road","neighborhood": "Ridgeway",    "city": "Lusaka", "type": "venue" },
-    { "id": "addr_unza_nice",         "street": "Great East Road Campus",     "neighborhood": "Northmead",   "city": "Lusaka", "type": "venue" }
+    { "id": "addr_northmead_flat_1",  "street": "14B Bwacha Road",                   "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_northmead_flat_2",  "street": "7 Bwacha Road",                     "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_northmead_house",   "street": "22 Lumumba Road",                   "neighborhood": "Northmead",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_kabulonga_house",   "street": "4 Leopards Hill Road",              "neighborhood": "Kabulonga",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_kabulonga_flat",    "street": "11A Leopards Hill Road",            "neighborhood": "Kabulonga",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_chilenje_1",        "street": "33 Chilenje South",                 "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
+    { "id": "addr_chilenje_2",        "street": "18 Chilenje South",                 "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
+    { "id": "addr_chilenje_3",        "street": "9 Chilenje North",                  "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
+    { "id": "addr_chilenje_4",        "street": "27 Chilenje South",                 "neighborhood": "Chilenje",    "city": "Lusaka", "type": "residence" },
+    { "id": "addr_matero_flat_1",     "street": "5 Freedom Way",                     "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
+    { "id": "addr_matero_flat_2",     "street": "12 Freedom Way",                    "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
+    { "id": "addr_matero_flat_3",     "street": "3 Freedom Way",                     "neighborhood": "Matero",      "city": "Lusaka", "type": "residence" },
+    { "id": "addr_woodlands_flat_1",  "street": "8 Addis Ababa Drive",               "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_woodlands_house_1", "street": "19 Addis Ababa Drive",              "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_woodlands_house_2", "street": "31 Addis Ababa Drive",              "neighborhood": "Woodlands",   "city": "Lusaka", "type": "residence" },
+    { "id": "addr_rhodes_park_1",     "street": "2 Independence Avenue",             "neighborhood": "Rhodes Park", "city": "Lusaka", "type": "residence" },
+    { "id": "addr_rhodes_park_2",     "street": "15 Independence Avenue",            "neighborhood": "Rhodes Park", "city": "Lusaka", "type": "residence" },
+    { "id": "addr_kamwala_1",         "street": "Kamwala Market, Stand 44",          "neighborhood": "Kamwala",     "city": "Lusaka", "type": "business" },
+    { "id": "addr_copperbelt_room",   "street": "12 Cha Cha Cha Road",               "neighborhood": "City Centre", "city": "Lusaka", "type": "venue" },
+    { "id": "addr_copperbelt_alley",  "street": "Rear alley, 12 Cha Cha Cha Road",  "neighborhood": "City Centre", "city": "Lusaka", "type": "crime_scene" },
+    { "id": "addr_ridgeway_lounge",   "street": "Ridgeway Hotel, Church Road",       "neighborhood": "Ridgeway",    "city": "Lusaka", "type": "venue" },
+    { "id": "addr_unza_nice",         "street": "Great East Road Campus",            "neighborhood": "Northmead",   "city": "Lusaka", "type": "venue" }
   ],
 
   "accusationChoices": {
@@ -259,9 +259,9 @@
       "arthur_mwape"
     ],
     "weapons": [
-      { "id": "guitar_estring", "label": "Guitar E-string wire"     },
-      { "id": "service_revolver", "label": "Service revolver (.38)" },
-      { "id": "broken_bottle",  "label": "Broken glass bottle"      }
+      { "id": "guitar_estring",   "label": "Guitar E-string wire"     },
+      { "id": "service_revolver", "label": "Service revolver (.38)"   },
+      { "id": "broken_bottle",    "label": "Broken glass bottle"      }
     ],
     "locations": [
       { "id": "loc_copperbelt_alley",  "label": "Alley behind The Copperbelt Room" },
@@ -269,6 +269,892 @@
       { "id": "loc_northmead_flat",    "label": "Kasonde's flat in Northmead"       }
     ]
   },
+
+  "phone_calls": [
+    {
+      "id": 1,
+      "caller_id": "bernard_chanda",
+      "receiver_id": "grace_mwape",
+      "date": "1974-10-03",
+      "time": "18:45",
+      "duration_min": 14,
+      "exchange": "NCCM-Central",
+      "notes": "Chanda calls Grace Mwape from NCCM offices."
+    },
+    {
+      "id": 2,
+      "caller_id": "bernard_chanda",
+      "receiver_id": "grace_mwape",
+      "date": "1974-10-17",
+      "time": "19:20",
+      "duration_min": 22,
+      "exchange": "NCCM-Central",
+      "notes": "Chanda calls Grace Mwape from NCCM offices."
+    },
+    {
+      "id": 3,
+      "caller_id": "bernard_chanda",
+      "receiver_id": "grace_mwape",
+      "date": "1974-11-01",
+      "time": "12:30",
+      "duration_min": 31,
+      "exchange": "NCCM-Central",
+      "notes": "Chanda calls Grace Mwape from NCCM offices. Unusually long duration."
+    },
+    {
+      "id": 4,
+      "caller_id": "bernard_chanda",
+      "receiver_id": "grace_mwape",
+      "date": "1974-11-14",
+      "time": "15:10",
+      "duration_min": 8,
+      "exchange": "NCCM-Central",
+      "notes": "Chanda calls Grace Mwape on the afternoon of 14 November."
+    },
+    {
+      "id": 5,
+      "caller_id": "grace_mwape",
+      "receiver_id": "victor_kasonde",
+      "date": "1974-11-10",
+      "time": "10:30",
+      "duration_min": 6,
+      "exchange": "Kabulonga",
+      "notes": "Grace Mwape calls Victor Kasonde at his home number. Content unknown."
+    },
+    {
+      "id": 6,
+      "caller_id": "victor_kasonde",
+      "receiver_id": "grace_mwape",
+      "date": "1974-11-12",
+      "time": "14:00",
+      "duration_min": 3,
+      "exchange": "Northmead",
+      "notes": "Victor Kasonde calls The Copperbelt Room. Short call."
+    },
+    {
+      "id": 7,
+      "caller_id": "victor_kasonde",
+      "receiver_id": "joanna_zulu",
+      "date": "1974-11-11",
+      "time": "16:15",
+      "duration_min": 18,
+      "exchange": "Northmead",
+      "notes": "Victor Kasonde calls Joanna Zulu at Radio Zambia. Likely session scheduling."
+    },
+    {
+      "id": 8,
+      "caller_id": "victor_kasonde",
+      "receiver_id": "joanna_zulu",
+      "date": "1974-11-13",
+      "time": "17:00",
+      "duration_min": 11,
+      "exchange": "Northmead",
+      "notes": "Victor Kasonde calls Joanna Zulu at Radio Zambia. Second call in three days."
+    },
+    {
+      "id": 9,
+      "caller_id": "choolwe_mutale",
+      "receiver_id": "victor_kasonde",
+      "date": "1974-11-10",
+      "time": "09:15",
+      "duration_min": 5,
+      "exchange": "Woodlands",
+      "notes": "Mutale calls Kasonde. Believed to relate to the unpaid commission of K40."
+    },
+    {
+      "id": 10,
+      "caller_id": "victor_kasonde",
+      "receiver_id": "choolwe_mutale",
+      "date": "1974-11-12",
+      "time": "11:30",
+      "duration_min": 2,
+      "exchange": "Northmead",
+      "notes": "Kasonde calls Mutale. Very short call."
+    },
+    {
+      "id": 11,
+      "caller_id": "elizabeth_kasonde",
+      "receiver_id": "victor_kasonde",
+      "date": "1974-11-10",
+      "time": "20:00",
+      "duration_min": 12,
+      "exchange": "Kabulonga",
+      "notes": "Elizabeth Kasonde calls her brother. He told her he was in a complicated situation involving the club."
+    },
+    {
+      "id": 12,
+      "caller_id": "victor_kasonde",
+      "receiver_id": "agnes_lungu",
+      "date": "1974-11-13",
+      "time": "19:45",
+      "duration_min": 9,
+      "exchange": "Northmead",
+      "notes": "Victor calls Agnes Lungu. Agnes later reported the call was brief and he seemed distracted."
+    },
+    {
+      "id": 13,
+      "caller_id": "solomon_musonda",
+      "receiver_id": null,
+      "date": "1974-11-12",
+      "time": "08:30",
+      "duration_min": 7,
+      "exchange": "Lusaka-Central",
+      "notes": "Musonda calls Livingstone Transport Co-operative from Lusaka to arrange delivery confirmation before departing."
+    },
+    {
+      "id": 14,
+      "caller_id": "solomon_musonda",
+      "receiver_id": null,
+      "date": "1974-11-14",
+      "time": "09:00",
+      "duration_min": 4,
+      "exchange": "Livingstone",
+      "notes": "Musonda calls his Lusaka office from Livingstone exchange. Confirms on-site with trucks. Call places him in Livingstone on the day of the murder."
+    },
+    {
+      "id": 15,
+      "caller_id": "grace_mwape",
+      "receiver_id": null,
+      "date": "1974-11-14",
+      "time": "11:00",
+      "duration_min": null,
+      "exchange": "Kabulonga",
+      "notes": "Outbound call from Grace Mwape. Receiver number not attributed in exchange log. Duration unrecorded."
+    },
+    {
+      "id": 16,
+      "caller_id": "arthur_mwape",
+      "receiver_id": "grace_mwape",
+      "date": "1974-11-14",
+      "time": "23:05",
+      "duration_min": 2,
+      "exchange": "Pamodzi-Hotel",
+      "notes": "Arthur Mwape calls Grace from the Pamodzi Hotel. Consistent with his statement that Grace telephoned him about the incident — exchange log records the call as initiated by Arthur."
+    },
+    {
+      "id": 17,
+      "caller_id": null,
+      "receiver_id": "francis_bwalya",
+      "date": "1972-09-28",
+      "time": "14:00",
+      "duration_min": 3,
+      "exchange": "Chilenje",
+      "notes": "Incoming call to DI Bwalya from Chilenje exchange. Three days before Mwale missing persons notice was filed. Caller not identified."
+    }
+  ],
+
+  "bank_records": [
+    {
+      "id": 1,
+      "person_id": "victor_kasonde",
+      "date": "1973-11-03",
+      "amount": 500.00,
+      "txn_type": "withdrawal",
+      "memo": "Personal loan — S.M."
+    },
+    {
+      "id": 2,
+      "person_id": "victor_kasonde",
+      "date": "1974-08-01",
+      "amount": 50.00,
+      "txn_type": "deposit",
+      "memo": "Services rendered"
+    },
+    {
+      "id": 3,
+      "person_id": "victor_kasonde",
+      "date": "1974-09-01",
+      "amount": 50.00,
+      "txn_type": "deposit",
+      "memo": "Services rendered"
+    },
+    {
+      "id": 4,
+      "person_id": "victor_kasonde",
+      "date": "1974-10-01",
+      "amount": 50.00,
+      "txn_type": "deposit",
+      "memo": "Services rendered"
+    },
+    {
+      "id": 5,
+      "person_id": "victor_kasonde",
+      "date": "1974-09-22",
+      "amount": 35.00,
+      "txn_type": "deposit",
+      "memo": "Performance fee — Copperbelt Room"
+    },
+    {
+      "id": 6,
+      "person_id": "victor_kasonde",
+      "date": "1974-10-31",
+      "amount": 35.00,
+      "txn_type": "deposit",
+      "memo": "Performance fee — Copperbelt Room"
+    },
+    {
+      "id": 7,
+      "person_id": "victor_kasonde",
+      "date": "1974-11-14",
+      "amount": 500.00,
+      "txn_type": "deposit",
+      "memo": "Settlement — Musonda Transport"
+    },
+    {
+      "id": 8,
+      "person_id": "grace_mwape",
+      "date": "1973-06-15",
+      "amount": 500.00,
+      "txn_type": "withdrawal",
+      "memo": "Club maintenance"
+    },
+    {
+      "id": 9,
+      "person_id": "grace_mwape",
+      "date": "1973-09-03",
+      "amount": 650.00,
+      "txn_type": "withdrawal",
+      "memo": "Equipment repair"
+    },
+    {
+      "id": 10,
+      "person_id": "grace_mwape",
+      "date": "1973-12-18",
+      "amount": 800.00,
+      "txn_type": "withdrawal",
+      "memo": "Year-end stock"
+    },
+    {
+      "id": 11,
+      "person_id": "grace_mwape",
+      "date": "1974-02-14",
+      "amount": 650.00,
+      "txn_type": "withdrawal",
+      "memo": "Electrical work"
+    },
+    {
+      "id": 12,
+      "person_id": "grace_mwape",
+      "date": "1974-04-08",
+      "amount": 750.00,
+      "txn_type": "withdrawal",
+      "memo": "Sound equipment"
+    },
+    {
+      "id": 13,
+      "person_id": "grace_mwape",
+      "date": "1974-06-20",
+      "amount": 900.00,
+      "txn_type": "withdrawal",
+      "memo": "Stage repair"
+    },
+    {
+      "id": 14,
+      "person_id": "grace_mwape",
+      "date": "1974-08-12",
+      "amount": 850.00,
+      "txn_type": "withdrawal",
+      "memo": "Air conditioning service"
+    },
+    {
+      "id": 15,
+      "person_id": "grace_mwape",
+      "date": "1974-10-01",
+      "amount": 1050.00,
+      "txn_type": "withdrawal",
+      "memo": "Renovation — first payment"
+    },
+    {
+      "id": 16,
+      "person_id": "grace_mwape",
+      "date": "1974-08-01",
+      "amount": 50.00,
+      "txn_type": "withdrawal",
+      "memo": "Music consultant"
+    },
+    {
+      "id": 17,
+      "person_id": "grace_mwape",
+      "date": "1974-09-01",
+      "amount": 50.00,
+      "txn_type": "withdrawal",
+      "memo": "Music consultant"
+    },
+    {
+      "id": 18,
+      "person_id": "grace_mwape",
+      "date": "1974-10-01",
+      "amount": 50.00,
+      "txn_type": "withdrawal",
+      "memo": "Music consultant"
+    },
+    {
+      "id": 19,
+      "person_id": "solomon_musonda",
+      "date": "1973-11-03",
+      "amount": 500.00,
+      "txn_type": "withdrawal",
+      "memo": "Personal loan — V.K."
+    },
+    {
+      "id": 20,
+      "person_id": "solomon_musonda",
+      "date": "1974-10-15",
+      "amount": 1200.00,
+      "txn_type": "deposit",
+      "memo": "Ndola contract — copper fittings delivery"
+    },
+    {
+      "id": 21,
+      "person_id": "solomon_musonda",
+      "date": "1974-11-03",
+      "amount": 1450.00,
+      "txn_type": "deposit",
+      "memo": "Livingstone contract — southern route"
+    },
+    {
+      "id": 22,
+      "person_id": "solomon_musonda",
+      "date": "1974-11-14",
+      "amount": 500.00,
+      "txn_type": "deposit",
+      "memo": "Debt settlement — Kasonde"
+    },
+    {
+      "id": 23,
+      "person_id": "bernard_chanda",
+      "date": "1974-07-01",
+      "amount": 150.00,
+      "txn_type": "withdrawal",
+      "memo": "Personal"
+    },
+    {
+      "id": 24,
+      "person_id": "bernard_chanda",
+      "date": "1974-08-01",
+      "amount": 150.00,
+      "txn_type": "withdrawal",
+      "memo": "Personal"
+    },
+    {
+      "id": 25,
+      "person_id": "bernard_chanda",
+      "date": "1974-09-01",
+      "amount": 150.00,
+      "txn_type": "withdrawal",
+      "memo": "Personal"
+    },
+    {
+      "id": 26,
+      "person_id": "bernard_chanda",
+      "date": "1974-10-01",
+      "amount": 150.00,
+      "txn_type": "withdrawal",
+      "memo": "Personal"
+    },
+    {
+      "id": 27,
+      "person_id": "bernard_chanda",
+      "date": "1974-11-01",
+      "amount": 150.00,
+      "txn_type": "withdrawal",
+      "memo": "Personal"
+    }
+  ],
+
+  "interviews": [
+    {
+      "id": 1,
+      "subject_id": "enos_simukonda",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-15",
+      "location": "The Copperbelt Room, 12 Cha Cha Cha Road",
+      "statement": "I finished mopping the back corridor at around half past one in the morning. When I pushed open the alley door — the one by the stage store — I nearly tripped. A man was lying face down between the bins and the wall. I called out. No movement. I ran inside and found Chilufya at the front and told him to call the police. I did not touch the body. The alley door latch was already up when I reached it. I assumed someone had left it open for air."
+    },
+    {
+      "id": 2,
+      "subject_id": "chilufya_nsofu",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-15",
+      "location": "The Copperbelt Room, 12 Cha Cha Cha Road",
+      "statement": "My post is the front entrance. I was there until around ten past ten. Then Mrs Mwape — Grace Mwape — came to me personally. She said there was a delivery man at the service gate who needed escorting out. She gave me fifty ngwee and said she would watch the front door for twenty minutes. I went to the service gate. There was no one there. I waited, then walked around to the rear alley. Nothing. I came back to my post at about twenty to eleven. Mrs Mwape was gone from the front by then. I assumed she had returned to her office."
+    },
+    {
+      "id": 3,
+      "subject_id": "blessings_mwanza",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-15",
+      "location": "The Copperbelt Room, 12 Cha Cha Cha Road",
+      "statement": "Kasonde came to the bar around nine, between sets. He seemed anxious — kept glancing toward the back corridor. He had one Mosi and went back. Later, around ten or ten past, I saw Mrs Mwape walking toward the back corridor. That is normal — the office is that way. I did not see her come back. The bar was busy. At around twenty past ten the band returned to the stage without Kasonde. Emmanuel told the room he was taking a short break. That was not normal. Kasonde never missed an entrance."
+    },
+    {
+      "id": 4,
+      "subject_id": "temwani_phiri",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-15",
+      "location": "The Copperbelt Room, 12 Cha Cha Cha Road",
+      "statement": "I was carrying empties from the rear bar to the store corridor at around ten past ten. I saw Mr Kasonde go through the internal door at the end of the corridor — the one that leads to the rear alley. A minute or two later, a woman followed him through the same door. I did not see her face. She wore a dark dress, blue or black. Medium height, not young. I thought nothing of it at the time. I assumed it was one of the owners."
+    },
+    {
+      "id": 5,
+      "subject_id": "emmanuel_banda",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-15",
+      "location": "CID Headquarters, Lusaka",
+      "statement": "Victor and I have played together for three years. He never walked off mid-set without telling me. When he did not come back for the second half I thought he had too much to drink, or a problem with his guitar. On the fifteenth, when I heard what had happened, I went straight to the equipment case. We keep spare E-strings — Victor breaks them at least once a month. There should have been four in the case. There were three. I last confirmed all four were there on the twelfth of November at our rehearsal."
+    },
+    {
+      "id": 6,
+      "subject_id": "elizabeth_kasonde",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-15",
+      "location": "11A Leopards Hill Road, Kabulonga",
+      "statement": "Victor telephoned me on the tenth. He said he was in a complicated situation involving someone at the club. He would not say more. He said he was going to resolve it and I should not worry. I told him to be careful with the people he was dealing with. He could be too clever for his own good sometimes. When you told me he had been strangled, my first thought was: that is close work. Someone he trusted, or someone who got very close to him."
+    },
+    {
+      "id": 7,
+      "subject_id": "agnes_lungu",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-16",
+      "location": "CID Headquarters, Lusaka",
+      "statement": "I was at the UNZA Nice bar from about half past eight until after midnight. I was with my cousin, Priscilla Banda — she is a second-year student there. Victor and I had argued that week. He was keeping something from me. I thought at first it was another woman. Now I think it was something more serious than that. He was frightened. Victor was not the type to be frightened easily. You can speak to Priscilla."
+    },
+    {
+      "id": 8,
+      "subject_id": "solomon_musonda",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-16",
+      "location": "CID Headquarters, Lusaka",
+      "statement": "I have been in Livingstone since the twelfth. Three trucks on a southern route contract — copper fittings for the railway line. I came back on the sixteenth when I heard the news. Victor owed me five hundred kwacha — borrowed in November of last year for some equipment. He paid me back on the fourteenth. His bank transferred it while I was in Livingstone. I had half written the debt off. I had no reason to want him dead. A dead man repays nothing."
+    },
+    {
+      "id": 9,
+      "subject_id": "arthur_mwape",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-16",
+      "location": "CID Headquarters, Lusaka",
+      "statement": "I was not at the club that evening. I had dinner at the Pamodzi Hotel with clients from Kitwe — mineral rights people. Grace handles the evening operations. She always has. She telephoned me around eleven to say there had been an incident and police had been called. I drove down immediately. She told me about Kasonde in the car park. She was very composed. Grace is always composed, of course — but that night, even for her, she was very composed."
+    },
+    {
+      "id": 10,
+      "subject_id": "grace_mwape",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-16",
+      "location": "CID Headquarters, Lusaka",
+      "statement": "I was in the office from approximately half past nine reviewing accounts. I did not leave the office during that time. I spoke briefly to Chilufya in the corridor around ten — I asked him to check the service gate, which has been giving trouble. I did not go to the rear alley. I did not follow anyone. Kasonde was our house-band musician. We had a straightforward professional relationship. I have no knowledge of why anyone would wish him harm."
+    },
+    {
+      "id": 11,
+      "subject_id": "choolwe_mutale",
+      "officer_id": "chibesa_mwamba",
+      "date": "1974-11-16",
+      "location": "CID Headquarters, Lusaka",
+      "statement": "I was at the Ridgeway Hotel restaurant from about seven until after ten. I was meeting Emmanuel Nkonde — he is promotions manager at Radio Zambia — to discuss future session arrangements for the band. He can confirm. As for Victor: yes, we had a disagreement over a commission. Forty kwacha. He had a different view of what we had agreed. It was not a large sum. I was not going to harm a man over forty kwacha."
+    }
+  ],
+
+  "crime_scene_reports": [
+    {
+      "id": 1,
+      "location_id": "addr_copperbelt_alley",
+      "date": "1974-11-15",
+      "time": "02:10",
+      "officer_id": "chibesa_mwamba",
+      "description": "Victim found lying face down between waste bins and the rear wall of the premises. Ligature mark around neck consistent with strangulation by thin wire. No signs of struggle beyond perimortem marks. Rear alley door found unlatched from inside — latch is operated from the corridor side only. Single set of fresh heel impressions in compacted dirt adjacent to body, smaller than victim's footwear, possibly female. No weapon recovered at scene."
+    },
+    {
+      "id": 2,
+      "location_id": "addr_northmead_flat_1",
+      "date": "1974-11-15",
+      "time": "09:30",
+      "officer_id": "chibesa_mwamba",
+      "description": "Search of victim's residence at 14B Bwacha Road, Northmead. One-bedroom flat, no signs of disturbance. Personal papers searched. Recovered one handwritten note (evidence item 4) found inside a book on the bedroom shelf. Note reads: 'Agreed amount monthly, first of each month, until I say otherwise. If you stop I speak to Arthur.' Unsigned. Flat otherwise unremarkable."
+    }
+  ],
+
+  "evidence": [
+    {
+      "id": 1,
+      "report_id": 1,
+      "item": "Guitar E-string",
+      "description": "Single guitar E-string wire, approximately 65 centimetres, found around the victim's neck post-mortem. Light gauge, consistent with commercial guitar strings. Identified by Emmanuel Banda as matching the type used by Broken String. One string of this type found missing from the band's supply case — last confirmed present on 12 November.",
+      "location_found": "Around victim's neck, rear alley"
+    },
+    {
+      "id": 2,
+      "report_id": 1,
+      "item": "Heel impression",
+      "description": "Single partial heel impression in compacted dirt, adjacent to body. Approximately 7 centimetres width. Inconsistent with victim's footwear (size 11 boot). Estimate: female shoe, size 5 to 6. Photographed. Cast not taken due to dry conditions.",
+      "location_found": "Rear alley, adjacent to body"
+    },
+    {
+      "id": 3,
+      "report_id": 1,
+      "item": "Internal door latch",
+      "description": "Alley-side internal door found in unlatched position when scene was examined. Latch mechanism is operated from the corridor side only — it cannot be opened from the alley without a key. Indicates the door was opened from inside by someone with access to the back corridor.",
+      "location_found": "Internal door, stage corridor"
+    },
+    {
+      "id": 4,
+      "report_id": 2,
+      "item": "Handwritten note",
+      "description": "Note reads: 'Agreed amount monthly, first of each month, until I say otherwise. If you stop I speak to Arthur.' Unsigned. Found inside a copy of 'The African Child' on the victim's bedroom shelf. Handwriting analysis requested. The reference to 'Arthur' may indicate the writer feared exposure to someone named Arthur.",
+      "location_found": "Victim's flat, 14B Bwacha Road, Northmead"
+    },
+    {
+      "id": 5,
+      "report_id": null,
+      "item": "Club cash box discrepancy",
+      "description": "Cash box from the club manager's office reviewed at DC Mwamba's request. Physical cash and ledger balance in agreement at K1,340. However, cross-reference with the club's Standard Chartered bank statements reveals repeated unexplained withdrawals over eighteen months, totalling approximately K6,500. All withdrawals are recorded under maintenance and equipment headings. No corresponding contractor receipts found on file.",
+      "location_found": "Club manager's office, The Copperbelt Room"
+    }
+  ],
+
+  "sightings": [
+    {
+      "id": 1,
+      "subject_id": "grace_mwape",
+      "location_id": "addr_copperbelt_room",
+      "date": "1974-11-14",
+      "time": "22:10",
+      "witness_id": "temwani_phiri",
+      "notes": "Woman in dark dress observed following Victor Kasonde through the internal corridor door toward the rear of the club. Witness did not see her face clearly. Described as medium height, not young. Consistent with Grace Mwape's build and attire that evening per other witness accounts."
+    },
+    {
+      "id": 2,
+      "subject_id": "patrick_kabwe",
+      "location_id": "addr_ridgeway_lounge",
+      "date": "1974-11-14",
+      "time": "20:30",
+      "witness_id": null,
+      "notes": "Kabwe seen at the Ridgeway Lounge bar at approximately 20:30. The Copper Kings were performing that evening. Confirmed by multiple venue staff and band members."
+    },
+    {
+      "id": 3,
+      "subject_id": "patrick_kabwe",
+      "location_id": "addr_ridgeway_lounge",
+      "date": "1974-11-14",
+      "time": "23:00",
+      "witness_id": null,
+      "notes": "Kabwe still present at the Ridgeway Lounge at end of the Copper Kings set, approximately 23:00. Alibi confirmed by venue staff and band members. Kabwe could not have been at The Copperbelt Room."
+    },
+    {
+      "id": 4,
+      "subject_id": "agnes_lungu",
+      "location_id": "addr_unza_nice",
+      "date": "1974-11-14",
+      "time": "20:30",
+      "witness_id": null,
+      "notes": "Agnes Lungu at the UNZA Nice bar from approximately 20:30. Present with her cousin, Priscilla Banda, a second-year student. Remained until after midnight. Alibi confirmed by cousin and venue staff."
+    },
+    {
+      "id": 5,
+      "subject_id": "choolwe_mutale",
+      "location_id": "addr_ridgeway_lounge",
+      "date": "1974-11-14",
+      "time": "19:30",
+      "witness_id": null,
+      "notes": "Choolwe Mutale at the Ridgeway Hotel restaurant from approximately 19:30 until after 22:00. Meeting with Emmanuel Nkonde, Radio Zambia Promotions. Confirmed by Nkonde and restaurant staff."
+    },
+    {
+      "id": 6,
+      "subject_id": "solomon_musonda",
+      "location_id": "LIVINGSTONE",
+      "date": "1974-11-14",
+      "time": null,
+      "witness_id": null,
+      "notes": "Musonda confirmed in Livingstone on the day of the murder. Presence verified by delivery receipts, truck driver statements, and telephone exchange records showing a call from the Livingstone exchange at 09:00."
+    },
+    {
+      "id": 7,
+      "subject_id": "bernard_chanda",
+      "location_id": "addr_copperbelt_room",
+      "date": "1974-11-14",
+      "time": "18:00",
+      "witness_id": "temwani_phiri",
+      "notes": "Grey Mercedes-Benz 220 with plate LSK 4412 observed parked outside The Copperbelt Room at approximately 18:00. Vehicle is registered to Bernard Chanda. Chanda not seen entering the premises."
+    }
+  ],
+
+  "vehicles": [
+    {
+      "id": 1,
+      "owner_id": "bernard_chanda",
+      "make": "Mercedes-Benz",
+      "model": "220",
+      "year": 1971,
+      "plate": "LSK 4412",
+      "color": "Grey"
+    },
+    {
+      "id": 2,
+      "owner_id": "arthur_mwape",
+      "make": "Peugeot",
+      "model": "504",
+      "year": 1973,
+      "plate": "LB 7831",
+      "color": "White"
+    },
+    {
+      "id": 3,
+      "owner_id": "solomon_musonda",
+      "make": "Bedford",
+      "model": "TK",
+      "year": 1969,
+      "plate": "LNB 0012",
+      "color": "Blue"
+    },
+    {
+      "id": 4,
+      "owner_id": "solomon_musonda",
+      "make": "Bedford",
+      "model": "TK",
+      "year": 1968,
+      "plate": "LNB 0045",
+      "color": "Green"
+    },
+    {
+      "id": 5,
+      "owner_id": "solomon_musonda",
+      "make": "Bedford",
+      "model": "TK",
+      "year": 1970,
+      "plate": "LNB 0089",
+      "color": "Red"
+    },
+    {
+      "id": 6,
+      "owner_id": "francis_bwalya",
+      "make": "Land Rover",
+      "model": "Series III",
+      "year": 1972,
+      "plate": "GP 5517",
+      "color": "Brown"
+    }
+  ],
+
+  "club_bookings": [
+    {
+      "id": 1,
+      "venue": "The Copperbelt Room, 12 Cha Cha Cha Road",
+      "performer_id": "victor_kasonde",
+      "date": "1974-11-14",
+      "set_start": "20:00",
+      "set_end": "23:30",
+      "fee": 35.00
+    },
+    {
+      "id": 2,
+      "venue": "Ridgeway Lounge, Ridgeway Hotel, Church Road",
+      "performer_id": "patrick_kabwe",
+      "date": "1974-11-14",
+      "set_start": "20:00",
+      "set_end": "23:00",
+      "fee": 25.00
+    },
+    {
+      "id": 3,
+      "venue": "The Copperbelt Room, 12 Cha Cha Cha Road",
+      "performer_id": "victor_kasonde",
+      "date": "1974-10-31",
+      "set_start": "20:00",
+      "set_end": "23:30",
+      "fee": 35.00
+    },
+    {
+      "id": 4,
+      "venue": "The Copperbelt Room, 12 Cha Cha Cha Road",
+      "performer_id": "victor_kasonde",
+      "date": "1974-11-07",
+      "set_start": "20:00",
+      "set_end": "23:30",
+      "fee": 35.00
+    }
+  ],
+
+  "newspaper_archive": [
+    {
+      "id": 1,
+      "date": "1974-11-16",
+      "headline": "Musician Found Dead at City Centre Club",
+      "section": "News",
+      "author_id": "boyd_sikazwe",
+      "body": "A 27-year-old musician was found dead in the rear alley of The Copperbelt Room on Cha Cha Cha Road in the early hours of Friday morning. Victor Kasonde, lead guitarist of popular Lusaka group Broken String, was discovered by club staff at approximately 01:40. Police have confirmed the death is being treated as suspicious. Detective Constable Chibesa Mwamba of the CID confirmed that enquiries are ongoing. The club has been temporarily closed. No arrests have been made."
+    },
+    {
+      "id": 2,
+      "date": "1974-08-22",
+      "headline": "Broken String: The Sound of Copper Town",
+      "section": "Arts and Culture",
+      "author_id": "boyd_sikazwe",
+      "body": "In a first-floor rehearsal room off Cairo Road, four young men are building something. Broken String — led by guitarist Victor Kasonde, 27, from Northmead — plays a style that fuses Zambian township rhythms with electric lines that would not be out of place in Lagos or Kinshasa. 'We are making Zambian music for Zambia,' says Kasonde. 'Not copying anyone.' Radio Zambia has broadcast the group twice in the past twelve months. A third session, and possibly a vinyl pressing, is under negotiation. Broken String performs regularly at The Copperbelt Room on Cha Cha Cha Road, Thursday and Saturday evenings."
+    },
+    {
+      "id": 3,
+      "date": "1972-10-04",
+      "headline": "Missing: Joseph Mwale, Musician, Last Seen Chilenje",
+      "section": "Notices",
+      "author_id": null,
+      "body": "The family of Joseph Mwale, 30, requests any information regarding his whereabouts. Mr Mwale, known as Joze, was a bass guitarist with several Lusaka musical groups. He was last seen in the Chilenje area on or around 20 September 1972. Described as tall, of medium build, with close-cropped hair. Anyone with information should contact CID Lusaka or the family directly. Case reference: 72/LKS/0891."
+    },
+    {
+      "id": 4,
+      "date": "1974-11-18",
+      "headline": "No Arrest in Cha Cha Cha Road Murder",
+      "section": "News",
+      "author_id": "boyd_sikazwe",
+      "body": "Three days after the death of musician Victor Kasonde at The Copperbelt Room, CID Lusaka has confirmed no arrests have been made. A spokesperson said enquiries are continuing and the investigation is active. Kasonde, the lead guitarist of Broken String, was found strangled in the club's rear alley in the early hours of 15 November. Bandmates and family have paid tribute. The club remains temporarily closed."
+    }
+  ],
+
+  "precinct_logs": [
+    {
+      "id": 1,
+      "date": "1974-11-15",
+      "officer_id": "chibesa_mwamba",
+      "entry_type": "shift_log",
+      "notes": "01:52 — Called to The Copperbelt Room, 12 Cha Cha Cha Road. Body of male found in rear alley by club caretaker. Victim identified as Victor Kasonde, 14B Bwacha Road, Northmead. Scene secured. Initial statements taken from E. Simukonda (caretaker), B. Mwanza (bartender), T. Phiri (bar back), C. Nsofu (bouncer). Evidence log opened. CID notified at 02:20."
+    },
+    {
+      "id": 2,
+      "date": "1974-11-15",
+      "officer_id": "chibesa_mwamba",
+      "entry_type": "case_note",
+      "notes": "06:15 — Next of kin notified. Elizabeth Kasonde, 11A Leopards Hill Road, Kabulonga. 09:30 — Search of victim's flat, 14B Bwacha Road, Northmead. Handwritten note recovered, logged as evidence item 4. Note references an agreed monthly payment and a person named Arthur. Flat otherwise undisturbed."
+    },
+    {
+      "id": 3,
+      "date": "1972-10-04",
+      "officer_id": "francis_bwalya",
+      "entry_type": "missing_persons",
+      "notes": "Case 72/LKS/0891. Joseph Mwale, male, 30, musician, last known address Chilenje. Last seen approximately 20 September 1972. No physical evidence of foul play at last known address. Subject known to travel between Lusaka, Ndola, and Livingstone for musical engagements. Enquiries initiated with Ndola and Livingstone divisions."
+    },
+    {
+      "id": 4,
+      "date": "1972-12-01",
+      "officer_id": "francis_bwalya",
+      "entry_type": "missing_persons",
+      "notes": "Case 72/LKS/0891 — progress note. No trace of Mwale found. Ndola and Livingstone divisions returned negative enquiries. No known associates have heard from him. Chilenje address vacated. File remains open."
+    },
+    {
+      "id": 5,
+      "date": "1973-03-15",
+      "officer_id": "francis_bwalya",
+      "entry_type": "admin",
+      "notes": "Case 72/LKS/0891 — Mwale. Supervisor review completed. Insufficient grounds for continued active investigation. No evidence of crime. Subject may have departed voluntarily. Classification changed to inactive. File retained on record."
+    }
+  ],
+
+  "relationships": [
+    {
+      "id": 1,
+      "person_a_id": "arthur_mwape",
+      "person_b_id": "grace_mwape",
+      "type": "spouse",
+      "notes": "Married 1956. Co-owners of The Copperbelt Room. Arthur is the public-facing partner; Grace manages the accounts."
+    },
+    {
+      "id": 2,
+      "person_a_id": "grace_mwape",
+      "person_b_id": "bernard_chanda",
+      "type": "romantic",
+      "notes": "Extramarital affair. Duration unknown, at least several months. Victor Kasonde was aware of the relationship."
+    },
+    {
+      "id": 3,
+      "person_a_id": "grace_mwape",
+      "person_b_id": "victor_kasonde",
+      "type": "employer",
+      "notes": "Mwape employed Kasonde as house-band musician. Kasonde was also blackmailing her at K50 per month over the embezzlement and the affair."
+    },
+    {
+      "id": 4,
+      "person_a_id": "victor_kasonde",
+      "person_b_id": "agnes_lungu",
+      "type": "romantic",
+      "notes": "Relationship of fourteen months. Lungu was unaware of the blackmail arrangement or the specifics of what Kasonde had discovered."
+    },
+    {
+      "id": 5,
+      "person_a_id": "victor_kasonde",
+      "person_b_id": "choolwe_mutale",
+      "type": "business",
+      "notes": "Mutale acted as Kasonde's informal booking agent. Unpaid commission of K40 was in dispute at the time of Kasonde's death."
+    },
+    {
+      "id": 6,
+      "person_a_id": "solomon_musonda",
+      "person_b_id": "victor_kasonde",
+      "type": "creditor",
+      "notes": "Musonda extended a K500 personal loan to Kasonde in November 1973. Kasonde repaid in full on 14 November 1974, the day of his murder."
+    },
+    {
+      "id": 7,
+      "person_a_id": "victor_kasonde",
+      "person_b_id": "patrick_kabwe",
+      "type": "rival",
+      "notes": "Public dispute on 11 November 1974 over a composition Kabwe alleged Kasonde had stolen. Multiple witnesses present. Dispute was ongoing at time of death."
+    },
+    {
+      "id": 8,
+      "person_a_id": "victor_kasonde",
+      "person_b_id": "emmanuel_banda",
+      "type": "colleague",
+      "notes": "Bandmates in Broken String for three years. Close personal friendship. Emmanuel was the first to report the missing E-string to CID."
+    },
+    {
+      "id": 9,
+      "person_a_id": "victor_kasonde",
+      "person_b_id": "joanna_zulu",
+      "type": "professional",
+      "notes": "Zulu was coordinating a Radio Zambia studio session and potential vinyl pressing for Broken String. Met Kasonde privately twice in the week before his death."
+    },
+    {
+      "id": 10,
+      "person_a_id": "chilufya_nsofu",
+      "person_b_id": "grace_mwape",
+      "type": "employee",
+      "notes": "Nsofu employed as head bouncer at The Copperbelt Room. On the night of the murder, Grace Mwape paid him fifty ngwee to vacate the front entrance on a false pretext."
+    },
+    {
+      "id": 11,
+      "person_a_id": "francis_bwalya",
+      "person_b_id": "rajan_patel",
+      "type": "acquaintance",
+      "notes": "Bwalya handles commercial disputes in Kamwala district. Patel Brothers has been subject to multiple market disputes within Bwalya's caseload. Contact extends beyond official channels."
+    }
+  ],
+
+  "confidential_notes": [
+    {
+      "id": 1,
+      "date": "1974-02-15",
+      "author_badge": "DI/CID/0047",
+      "classification": "RESTRICTED",
+      "content": "Received visit from R. Patel (Patel Brothers Import Wholesale, Kamwala, Stand 44) regarding ongoing market dispute with the Zambia Co-operative Federation. Matter resolved informally. Payment of K200 received as a consultancy gratuity. No formal record to be filed."
+    },
+    {
+      "id": 2,
+      "date": "1974-06-03",
+      "author_badge": "DI/CID/0047",
+      "classification": "RESTRICTED",
+      "content": "Second informal settlement — Patel Brothers matter. K300 received. R. Patel states ZCF dispute fully resolved. No further action required. Memorandum for personal file only."
+    },
+    {
+      "id": 3,
+      "date": "1974-10-18",
+      "author_badge": "DI/CID/0047",
+      "classification": "RESTRICTED",
+      "content": "Patel Brothers — further consultancy gratuity, K200. New matter: ZCF inspectors threatening licence review of Stand 44. Advised R. Patel to file application with the district council rather than engage inspectors directly. My involvement in this matter is strictly advisory in nature."
+    },
+    {
+      "id": 4,
+      "date": "1974-11-07",
+      "author_badge": "DI/CID/0047",
+      "classification": "RESTRICTED",
+      "content": "Meeting with S. Patel at the Lusaka Club, 18:00. He raised the possibility of a more formal ongoing arrangement. I told him I could not"
+    }
+  ],
 
   "clues": [],
   "sideThreads": [],

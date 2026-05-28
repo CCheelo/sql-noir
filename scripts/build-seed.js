@@ -22,7 +22,22 @@ const SEED_FILE = path.join(DATA_DIR, 'seed.sql');
 // Tables must be listed AFTER the tables they reference
 // (e.g. addresses before people if people had a real FK — SQLite doesn't
 // enforce FKs by default, but good practice).
-const TABLE_ORDER = ['addresses', 'people'];
+const TABLE_ORDER = [
+  'addresses',
+  'people',
+  'phone_calls',
+  'bank_records',
+  'interviews',
+  'crime_scene_reports',
+  'evidence',
+  'sightings',
+  'vehicles',
+  'club_bookings',
+  'newspaper_archive',
+  'precinct_logs',
+  'relationships',
+  'confidential_notes',
+];
 
 // ============================================================
 // HELPERS
