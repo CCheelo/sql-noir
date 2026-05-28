@@ -283,11 +283,10 @@ function handleAccusation() {
     gameOver = true;
     setTimeout(() => {
       closeAccusationModal();
-      // For Milestone 1 there is one stub ending.
-      // Future milestones will branch based on side threads found.
-      const epilogue = storyData.endingEpilogue.open_and_shut;
+      const { endingKey, endingTitle } = selectEnding();
+      const epilogue = storyData.endingEpilogue[endingKey];
       const rank     = getDetectiveRank(queriesRun, hintsUsedTotal, attemptsLeft);
-      showEndingScreen('Open and Shut', epilogue, rank);
+      showEndingScreen(endingTitle, epilogue, rank);
     }, 1800);
 
   } else {
@@ -319,6 +318,31 @@ function showAccusationFeedback(message, type) {
   const el = document.getElementById('accusation-feedback');
   el.textContent = message;
   el.className   = `accusation-feedback ${type}`;
+}
+
+// ============================================================
+// ENDING SELECTION
+// ============================================================
+
+/**
+ * Picks which epilogue to show based on which side threads the player uncovered.
+ *
+ * Priority (highest first):
+ *   1. whole_truth     — Chanda connection discovered (political fallout)
+ *   2. justice_with_mercy — full blackmail chain documented
+ *   3. open_and_shut   — basic solve
+ */
+function selectEnding() {
+  const chandaFound    = foundClueIds.has('chanda_calls');
+  const blackmailFull  = foundClueIds.has('blackmail_note') && foundClueIds.has('bank_blackmail');
+
+  if (chandaFound) {
+    return { endingKey: 'whole_truth', endingTitle: 'The Whole Truth' };
+  }
+  if (blackmailFull) {
+    return { endingKey: 'justice_with_mercy', endingTitle: 'Justice with Mercy' };
+  }
+  return { endingKey: 'open_and_shut', endingTitle: 'Open and Shut' };
 }
 
 // ============================================================
