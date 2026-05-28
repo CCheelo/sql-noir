@@ -36,7 +36,6 @@ export function setLoadingProgress(pct) {
 
 /** Stop loading screen, show the main game. */
 export function showGame() {
-  clearInterval(_loadingMsgInterval);
   setLoadingProgress(100);
   // Brief pause so the bar snaps to 100% before we swap screens
   setTimeout(() => {
