@@ -23,6 +23,11 @@ node scripts/build-seed.js
 
 **Never hand-edit `seed.sql`** — it is fully generated. All case data lives in `case.json`.
 
+> **Windows note:** If `node` is not in PATH, use the Playwright-bundled binary:
+> ```
+> C:\Users\hp\AppData\Local\ms-playwright-go\1.50.1\node.exe scripts\build-seed.js
+> ```
+
 ## Architecture
 
 ### Data flow
@@ -59,7 +64,7 @@ At runtime, `main.js` fetches all four data files in parallel, initialises the s
 
 - **All narrative text** (briefing, blocked-SQL messages, ending epilogues, rank labels) lives in `data/story.json`. No player-visible strings belong in JS files.
 - **All case content** (people, addresses, solution, accusation choices) lives in `data/case.json`. Character names, occupations, and notes are all cosmetically editable there without touching code.
-- **The confidential_notes table** is the easter egg. It is defined in `schema.sql` and seeded (in future milestones) but is explicitly filtered out of the Schema tab in `main.js`. Players find it by querying `sqlite_master`.
+- **The confidential_notes table** is the easter egg. It is defined in `schema.sql` and seeded with 4 rows (DI Bwalya kickback memos, 1974), but explicitly filtered out of the Schema tab in `main.js`. Players find it by querying `sqlite_master`.
 
 ### CSS structure
 
@@ -82,9 +87,19 @@ All epilogue text lives in `data/story.json` under `endingEpilogue`.
 
 `js/hints.js` holds the 12 clue definitions. Each has a `triggerPattern` RegExp that fires when any cell value in a query result matches. When triggered, the clue's `notebookEntry` text appears in the NOTES tab. Players can then reveal up to 3 progressive hints per clue.
 
+Clue IDs (in definition order): `missing_estring`, `blackmail_note`, `bouncer_paid`, `woman_corridor`, `grace_movement`, `grace_lies`, `bank_blackmail`, `embezzlement`, `chanda_calls`, `musonda_alibi`, `chanda_vehicle`, `mwale_cold_case`.
+
 ### Save state
 
 `js/save.js` persists to `localStorage` after every query and hint reveal, keyed as `sql-noir-save-{caseVersion}`. Cleared on game over (correct accusation or all attempts used). Changing `caseVersion` in `case.json` automatically invalidates old saves.
+
+### Scoring
+
+`getDetectiveRank()` in `main.js`: `score = min(queriesRun × 4, 200) + (attemptsLeft × 40) + (cluesFound × 5) − (hintsUsed × 10)`. Thresholds: Recruit ≥ 0, Constable ≥ 80, Inspector ≥ 200, Superintendent ≥ 380 (from `rankLabels` in `story.json`).
+
+### GitHub repository
+
+https://github.com/CCheelo/sql-noir
 
 ## Adding content
 

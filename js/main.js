@@ -17,7 +17,7 @@
 import { initDatabase, runQuery, getTableNames, buildAutocompleteSchema } from './db.js';
 import { isDestructive, setBlockedMessages, getBlockedMessage }           from './blocker.js';
 import {
-  showLoadingScreen, setLoadingProgress, showGame, showLoadingError,
+  showLoadingScreen, setLoadingProgress, setLoadingStatus, showGame, showLoadingError,
   initTabs, populateSchemaList, populateBriefing,
   renderResults, renderError, renderBlocked,
   updateQueriesRun, updateAttemptsLeft, showEndingScreen,
@@ -51,19 +51,26 @@ let newEntriesSinceView = 0;           // badge count
 
 async function init() {
   showLoadingScreen();
-  setLoadingProgress(10);
 
   try {
-    // --- Step 1: Load sql.js ---
-    // initSqlJs is a global set by the sql-wasm.js <script> tag in index.html.
-    // locateFile tells sql.js where to download the companion .wasm file from.
+    // --- Step 1: Load sql.js (WASM — the slow part, ~1 MB download) ---
+    // Animate fake progress from 5 → 43 % while we wait so the bar moves.
+    let _wasmPct = 5;
+    setLoadingProgress(_wasmPct);
+    const _wasmInterval = setInterval(() => {
+      _wasmPct = Math.min(_wasmPct + 2, 43);
+      setLoadingProgress(_wasmPct);
+    }, 200);
+
     const SQL = await window.initSqlJs({
       locateFile: file =>
         `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/${file}`,
     });
+    clearInterval(_wasmInterval);
     setLoadingProgress(45);
 
     // --- Step 2: Fetch all data files in parallel ---
+    setLoadingStatus('Retrieving case files');
     const [schemaSql, seedSql, caseJson, storyJson] = await Promise.all([
       fetch('./data/schema.sql').then(r => { if (!r.ok) throw new Error('schema.sql'); return r.text(); }),
       fetch('./data/seed.sql').then(r   => { if (!r.ok) throw new Error('seed.sql');   return r.text(); }),
@@ -75,6 +82,7 @@ async function init() {
     setLoadingProgress(70);
 
     // --- Step 3: Initialise the database ---
+    setLoadingStatus('Initialising case file 74/LKS/1147');
     initDatabase(SQL, schemaSql, seedSql);
 
     // Tell the blocker which flavour messages to use when a query is blocked
@@ -87,6 +95,7 @@ async function init() {
     const schema = buildAutocompleteSchema();
 
     // --- Step 5: Mount the CodeMirror editor ---
+    setLoadingStatus('Mounting editor');
     editorView = initEditor(
       document.getElementById('query-editor'),
       schema,

@@ -11,26 +11,16 @@ const ROW_CAP = 20; // maximum rows displayed before the "narrow your query" not
 // LOADING SCREEN
 // ============================================================
 
-const loadingMessages = [
-  'Retrieving case files',
-  'Accessing precinct database',
-  'Initialising case file 74/LKS/1147',
-];
-let _loadingMsgIndex = 0;
-let _loadingMsgInterval = null;
-
-/** Start the loading screen and begin cycling the status text. */
+/** Start the loading screen. Status text is updated by setLoadingStatus() as steps complete. */
 export function showLoadingScreen() {
-  _loadingMsgIndex = 0;
-  const el = document.getElementById('loading-status-text');
-  if (el) el.textContent = loadingMessages[0];
+  setLoadingStatus('Accessing precinct database');
+  setLoadingProgress(0);
+}
 
-  // Cycle through loading messages every 1.2 seconds
-  _loadingMsgInterval = setInterval(() => {
-    _loadingMsgIndex = (_loadingMsgIndex + 1) % loadingMessages.length;
-    const el = document.getElementById('loading-status-text');
-    if (el) el.textContent = loadingMessages[_loadingMsgIndex];
-  }, 1200);
+/** Update the status line text shown below the case file header. */
+export function setLoadingStatus(text) {
+  const el = document.getElementById('loading-status-text');
+  if (el) el.textContent = text;
 }
 
 /**
@@ -40,6 +30,8 @@ export function showLoadingScreen() {
 export function setLoadingProgress(pct) {
   const bar = document.getElementById('loading-bar');
   if (bar) bar.style.width = `${pct}%`;
+  const pctEl = document.getElementById('loading-pct');
+  if (pctEl) pctEl.textContent = `${Math.round(pct)}%`;
 }
 
 /** Stop loading screen, show the main game. */
@@ -55,11 +47,9 @@ export function showGame() {
 
 /** Show an error message on the loading screen (e.g. WASM failed to fetch). */
 export function showLoadingError(message) {
-  clearInterval(_loadingMsgInterval);
   const el = document.getElementById('loading-error');
   if (el) el.textContent = message;
-  const statusEl = document.getElementById('loading-status-text');
-  if (statusEl) statusEl.textContent = 'Failed to load';
+  setLoadingStatus('Failed to load');
 }
 
 // ============================================================
