@@ -264,16 +264,34 @@ export function updateAttemptsLeft(count) {
 // ============================================================
 
 /**
- * Replaces the results area with the final epilogue text.
+ * Replaces the results area with the final epilogue, score breakdown,
+ * and a copy-able share code.
  *
  * @param {string} title     - ending label, e.g. "The Whole Truth"
  * @param {string} epilogue  - long-form text from story.json
  * @param {string} rank      - detective rank label
+ * @param {object} score     - { queriesRun, hintsUsed, cluesFound, totalClues, attemptsLeft, shareCode }
  */
-export function showEndingScreen(title, epilogue, rank) {
+export function showEndingScreen(title, epilogue, rank, score) {
   const area = document.getElementById('results-area');
   const countEl = document.getElementById('results-count');
   if (countEl) countEl.textContent = '';
+
+  const shareSection = score ? `
+    <div class="ending-score">
+      <div class="ending-score-row"><span>Queries run</span><span>${score.queriesRun}</span></div>
+      <div class="ending-score-row"><span>Clues found</span><span>${score.cluesFound} / ${score.totalClues}</span></div>
+      <div class="ending-score-row"><span>Hints used</span><span>${score.hintsUsed}</span></div>
+      <div class="ending-score-row"><span>Accusations remaining</span><span>${score.attemptsLeft}</span></div>
+    </div>
+    <div class="ending-share">
+      <div class="ending-share-label">SHARE YOUR RESULT</div>
+      <div class="ending-share-row">
+        <code class="ending-share-code" id="share-code-text">${escapeHtml(score.shareCode)}</code>
+        <button class="btn-share" id="copy-share-btn">COPY</button>
+      </div>
+    </div>
+  ` : '';
 
   area.innerHTML = `
     <div class="ending-screen">
@@ -281,12 +299,34 @@ export function showEndingScreen(title, epilogue, rank) {
       <div class="ending-title">${escapeHtml(title)}</div>
       <div class="ending-epilogue">${escapeHtml(epilogue)}</div>
       <div class="ending-rank">DETECTIVE RANK: ${escapeHtml(rank)}</div>
+      ${shareSection}
     </div>
   `;
 
   // Disable the accusation button after case is closed
   const btn = document.getElementById('accuse-btn');
   if (btn) btn.disabled = true;
+
+  // Wire up copy button
+  const copyBtn = document.getElementById('copy-share-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const code = document.getElementById('share-code-text')?.textContent || '';
+      navigator.clipboard.writeText(code).then(() => {
+        copyBtn.textContent = 'COPIED';
+        setTimeout(() => { copyBtn.textContent = 'COPY'; }, 2000);
+      }).catch(() => {
+        // Fallback: select the text
+        const el = document.getElementById('share-code-text');
+        if (el) {
+          const range = document.createRange();
+          range.selectNodeContents(el);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      });
+    });
+  }
 }
 
 // ============================================================

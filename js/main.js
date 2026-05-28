@@ -286,7 +286,8 @@ function handleAccusation() {
       const { endingKey, endingTitle } = selectEnding();
       const epilogue = storyData.endingEpilogue[endingKey];
       const rank     = getDetectiveRank(queriesRun, hintsUsedTotal, attemptsLeft);
-      showEndingScreen(endingTitle, epilogue, rank);
+      const score    = buildScore(endingKey, rank);
+      showEndingScreen(endingTitle, epilogue, rank, score);
     }, 1800);
 
   } else {
@@ -346,8 +347,35 @@ function selectEnding() {
 }
 
 // ============================================================
-// SCORING
+// SCORING AND SHARE CODE
 // ============================================================
+
+/**
+ * Builds the score summary object and generates a share code.
+ */
+function buildScore(endingKey, rank) {
+  const payload = {
+    v: caseData.caseVersion,
+    e: endingKey,
+    q: queriesRun,
+    h: hintsUsedTotal,
+    c: foundClues.length,
+    a: attemptsLeft,
+  };
+  // btoa is safe here — all values are ASCII
+  const shareCode = btoa(JSON.stringify(payload));
+
+  return {
+    queriesRun,
+    hintsUsed:   hintsUsedTotal,
+    cluesFound:  foundClues.length,
+    totalClues:  12,
+    attemptsLeft,
+    shareCode,
+  };
+}
+
+
 
 /**
  * Assigns a detective rank based on performance.
@@ -357,9 +385,11 @@ function selectEnding() {
  * @returns {string} rank label from story.json
  */
 function getDetectiveRank(queries, hintsUsed, remainingAttempts) {
-  // More queries = more exploration = higher base score
-  // Remaining attempts = didn't guess wildly
-  const score = Math.min(queries * 4, 200) + (remainingAttempts * 40);
+  const cluesFound = foundClues.length;
+  const score = Math.min(queries * 4, 200)
+    + (remainingAttempts * 40)
+    + (cluesFound * 5)
+    - (hintsUsed * 10);
   const ranks = storyData.rankLabels;
 
   // Find the highest rank whose minScore is <= our score
